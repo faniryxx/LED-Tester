@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
+    <width>757</width>
     <height>456</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <widget class="QLineEdit" name="ref">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
+      <x>10</x>
+      <y>10</y>
       <width>116</width>
       <height>20</height>
      </rect>
@@ -39,10 +39,10 @@
    <widget class="QLabel" name="intervalleText">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>20</y>
+      <x>180</x>
+      <y>10</y>
       <width>121</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -58,8 +58,8 @@
    <widget class="QSpinBox" name="intervalleValeur">
     <property name="geometry">
      <rect>
-      <x>319</x>
-      <y>17</y>
+      <x>320</x>
+      <y>10</y>
       <width>33</width>
       <height>20</height>
      </rect>
@@ -80,10 +80,10 @@
    <widget class="QLabel" name="dureeText">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>20</y>
+      <x>390</x>
+      <y>10</y>
       <width>136</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -99,8 +99,8 @@
    <widget class="QSpinBox" name="dureeValeur">
     <property name="geometry">
      <rect>
-      <x>546</x>
-      <y>17</y>
+      <x>540</x>
+      <y>10</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -123,8 +123,8 @@
      <rect>
       <x>640</x>
       <y>10</y>
-      <width>96</width>
-      <height>33</height>
+      <width>111</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -135,12 +135,63 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>15</pointsize>
+      <pointsize>11</pointsize>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
      </font>
     </property>
     <property name="text">
      <string>MESURER</string>
     </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>741</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="efficacite">
+     <attribute name="title">
+      <string>Efficacité</string>
+     </attribute>
+     <widget class="QChartView" name="chartViewEfficacite">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>711</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="stabilite">
+     <attribute name="title">
+      <string>Stabilité</string>
+     </attribute>
+     <widget class="QChartView" name="chartViewStabilite">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>711</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -148,13 +199,20 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
+     <width>757</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>QtCharts</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
