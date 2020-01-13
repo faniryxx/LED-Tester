@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     seriesEfficacite->append(45, 124);
     seriesEfficacite->append(50, 124);
 
-    QLineSeries *seriesStabilite = new QLineSeries();
+    /*QLineSeries *seriesStabilite = new QLineSeries();
     seriesStabilite->append(0, 35);
     seriesStabilite->append(5, 45);
     seriesStabilite->append(10, 23);
@@ -36,11 +36,15 @@ int main(int argc, char *argv[])
     seriesStabilite->append(35, 60);
     seriesStabilite->append(40, 54);
     seriesStabilite->append(45, 54);
-    seriesStabilite->append(50, 51);
+    seriesStabilite->append(50, 51);*/
 
     QTabWidget *tabWidget = principale.findChild<QTabWidget*>("tabWidget");
+
     QWidget *efficacite = tabWidget->findChild<QWidget*>("efficacite");
     QChartView *chartViewEfficacite = efficacite->findChild<QChartView*>("chartViewEfficacite");
+
+    QWidget *stabilite = tabWidget->findChild<QWidget*>("stabilite");
+    QChartView *chartViewStabilite = stabilite->findChild<QChartView*>("chartViewStabilite");
 
     QChart *chart = new QChart();
     chart->legend()->hide();
@@ -51,8 +55,20 @@ int main(int argc, char *argv[])
     chart->layout()->setContentsMargins(0,0,0,0);
     chart->setBackgroundRoundness(0);
 
+    /*QChart *chart2 = new QChart();
+    chart2->legend()->hide();
+    chart2->addSeries(seriesEfficacite);
+    chart2->createDefaultAxes();
+    chart2->setTitle("Exemple stabilite");
+    //chart2->setTheme(QChart::ChartThemeDark);
+    chart2->layout()->setContentsMargins(0,0,0,0);
+    chart2->setBackgroundRoundness(0);*/
+
     chartViewEfficacite->setChart(chart);
     chartViewEfficacite->setRenderHint(QPainter::Antialiasing);
+
+    /*chartViewStabilite->setChart(chart2);
+    chartViewStabilite->setRenderHint(QPainter::Antialiasing);*/
 
     principale.show();
     return a.exec();
