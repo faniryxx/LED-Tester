@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>483</height>
+    <height>495</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,32 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="5">
+     <widget class="QPushButton" name="boutonExporter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Exporter vers xls</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLabel" name="dureeText">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Durée totale de mesure (s):</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QLabel" name="intervalleText">
       <property name="sizePolicy">
@@ -28,59 +54,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="5">
-     <widget class="QPushButton" name="pushButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-        <underline>false</underline>
-        <strikeout>false</strikeout>
-       </font>
-      </property>
-      <property name="text">
-       <string>MESURER</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QSpinBox" name="dureeValeur">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimum">
-       <number>10</number>
-      </property>
-      <property name="maximum">
-       <number>3600</number>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QSpinBox" name="intervalleValeur">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>60</number>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="6">
+    <item row="2" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -89,7 +63,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="efficacite">
        <attribute name="title">
@@ -119,6 +93,34 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="couleurs">
+       <attribute name="title">
+        <string>Couleurs</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QChartView" name="chartViewCouleurs"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="temperature">
+       <attribute name="title">
+        <string>Température</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QChartView" name="chartViewTemperature"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
     <item row="0" column="0">
@@ -137,16 +139,55 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="dureeText">
+    <item row="0" column="5">
+     <widget class="QPushButton" name="boutonMesure">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+       </font>
+      </property>
       <property name="text">
-       <string>Durée totale de mesure (s):</string>
+       <string>MESURER</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QSpinBox" name="intervalleValeur">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>60</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QSpinBox" name="dureeValeur">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimum">
+       <number>10</number>
+      </property>
+      <property name="maximum">
+       <number>3600</number>
       </property>
      </widget>
     </item>
@@ -176,7 +217,7 @@
   <tabstop>ref</tabstop>
   <tabstop>intervalleValeur</tabstop>
   <tabstop>dureeValeur</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>boutonMesure</tabstop>
  </tabstops>
  <resources/>
  <connections/>

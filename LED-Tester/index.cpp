@@ -1,5 +1,7 @@
 #include "index.h"
 #include "ui_index.h"
+#include <QPainter>
+#include <QPdfWriter>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -12,4 +14,3 @@ Index::~Index()
 {
     delete ui;
 }
-

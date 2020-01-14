@@ -74,6 +74,71 @@ int main(int argc, char *argv[])
     chartViewStabilite->setRenderHint(QPainter::Antialiasing);
     //FIN STABILITE
 
+    //COULEURS
+    QWidget *couleurs = tabWidget->findChild<QWidget*>("couleurs");
+    QChartView *chartViewCouleurs = couleurs->findChild<QChartView*>("chartViewCouleurs");
+
+    QBarSet *rouge = new QBarSet("Rouge");
+    QBarSet *vert = new QBarSet("Vert");
+    QBarSet *bleu = new QBarSet("Bleu");
+
+    *rouge << 255;
+    *vert << 253;
+    *bleu << 200;
+
+    rouge->setColor(Qt::red);
+    vert->setColor(Qt::green);
+    bleu->setColor(Qt::blue);
+
+    QBarSeries *seriesCouleurs = new QBarSeries();
+    seriesCouleurs->append(rouge);
+    seriesCouleurs->append(vert);
+    seriesCouleurs->append(bleu);
+
+    QChart *chartCouleurs = new QChart();
+    chartCouleurs->addSeries(seriesCouleurs);
+    chartCouleurs->setTitle("Couleurs");
+    //chart->setAnimationOptions(QChart::SeriesAnimations);
+    chartCouleurs->layout()->setContentsMargins(0,0,0,0);
+    chartCouleurs->setBackgroundRoundness(0);
+
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setRange(0,255);
+    chartCouleurs->addAxis(axisY,Qt::AlignLeft);
+
+    chartViewCouleurs->setChart(chartCouleurs);
+    chartViewCouleurs->setRenderHint(QPainter::Antialiasing);
+    //FIN COULEURS
+
+    //TEMPERATURE
+    QWidget *temperature = tabWidget->findChild<QWidget*>("temperature");
+    QChartView *chartViewTemperature = temperature->findChild<QChartView*>("chartViewTemperature");
+
+    QSplineSeries *seriesTemperature = new QSplineSeries();
+    seriesTemperature->append(0, 100);
+    seriesTemperature->append(5, 100);
+    seriesTemperature->append(10, 98);
+    seriesTemperature->append(15, 95);
+    seriesTemperature->append(20, 80);
+    seriesTemperature->append(25, 65);
+    seriesTemperature->append(30, 50);
+    seriesTemperature->append(35, 45);
+    seriesTemperature->append(40, 40);
+    seriesTemperature->append(45, 35);
+    seriesTemperature->append(50, 30);
+
+    QChart *chartTemperature = new QChart();
+    chartTemperature->legend()->hide();
+    chartTemperature->addSeries(seriesTemperature);
+    chartTemperature->createDefaultAxes();
+    chartTemperature->setTitle("Exemple courbe de température");
+    chartTemperature->layout()->setContentsMargins(0,0,0,0);
+    chartTemperature->setBackgroundRoundness(0);
+
+    chartViewTemperature->setChart(chartTemperature);
+    chartViewTemperature->setRenderHint(QPainter::Antialiasing);
+    //FIN TEMPERATURE
+
     principale.show();
     return a.exec();
 }
