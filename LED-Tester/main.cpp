@@ -6,17 +6,8 @@
 
 using namespace QtCharts;
 
-int main(int argc, char *argv[])
+void creerGraphEfficacite(QChartView *chartViewEfficacite)
 {
-    QApplication::setStyle("fusion"); //fusion = theme
-    QApplication a(argc, argv);
-    Index principale;
-
-    QTabWidget *tabWidget = principale.findChild<QTabWidget*>("tabWidget");
-
-    QWidget *efficacite = tabWidget->findChild<QWidget*>("efficacite");
-    QChartView *chartViewEfficacite = efficacite->findChild<QChartView*>("chartViewEfficacite");
-
     //EFFICACITE
     QLineSeries *seriesEfficacite = new QLineSeries();
     seriesEfficacite->append(0, 125);
@@ -43,10 +34,10 @@ int main(int argc, char *argv[])
     chartViewEfficacite->setChart(chart);
     chartViewEfficacite->setRenderHint(QPainter::Antialiasing);
     //FIN EFFICACITE
+}
 
-    QWidget *stabilite = tabWidget->findChild<QWidget*>("stabilite");
-    QChartView *chartViewStabilite = stabilite->findChild<QChartView*>("chartViewStabilite");
-
+void creerGraphStabilite(QChartView *chartViewStabilite)
+{
     //STABILITE
     QLineSeries *seriesStabilite = new QLineSeries();
     seriesStabilite->append(0, 35);
@@ -73,11 +64,11 @@ int main(int argc, char *argv[])
     chartViewStabilite->setChart(chart2);
     chartViewStabilite->setRenderHint(QPainter::Antialiasing);
     //FIN STABILITE
+}
 
+void creerGraphCouleurs(QChartView *chartViewCouleurs)
+{
     //COULEURS
-    QWidget *couleurs = tabWidget->findChild<QWidget*>("couleurs");
-    QChartView *chartViewCouleurs = couleurs->findChild<QChartView*>("chartViewCouleurs");
-
     QBarSet *rouge = new QBarSet("Rouge");
     QBarSet *vert = new QBarSet("Vert");
     QBarSet *bleu = new QBarSet("Bleu");
@@ -109,11 +100,11 @@ int main(int argc, char *argv[])
     chartViewCouleurs->setChart(chartCouleurs);
     chartViewCouleurs->setRenderHint(QPainter::Antialiasing);
     //FIN COULEURS
+}
 
+void creerGraphTemperature(QChartView *chartViewTemperature)
+{
     //TEMPERATURE
-    QWidget *temperature = tabWidget->findChild<QWidget*>("temperature");
-    QChartView *chartViewTemperature = temperature->findChild<QChartView*>("chartViewTemperature");
-
     QSplineSeries *seriesTemperature = new QSplineSeries();
     seriesTemperature->append(0, 100);
     seriesTemperature->append(5, 100);
@@ -138,7 +129,39 @@ int main(int argc, char *argv[])
     chartViewTemperature->setChart(chartTemperature);
     chartViewTemperature->setRenderHint(QPainter::Antialiasing);
     //FIN TEMPERATURE
+}
+
+void GenererExemplesCharts(QChartView *chartViewEfficacite, QChartView *chartViewStabilite, QChartView *chartViewCouleurs, QChartView *chartViewTemperature)
+{
+    creerGraphEfficacite(chartViewEfficacite);
+    creerGraphStabilite(chartViewStabilite);
+    creerGraphCouleurs(chartViewCouleurs);
+    creerGraphTemperature(chartViewTemperature);
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication::setStyle("fusion"); //fusion = theme
+    QApplication a(argc, argv);
+    Index principale;
+
+    QTabWidget *tabWidget = principale.findChild<QTabWidget*>("tabWidget");
+
+    QWidget *efficacite = tabWidget->findChild<QWidget*>("efficacite");
+    QChartView *chartViewEfficacite = efficacite->findChild<QChartView*>("chartViewEfficacite"); 
+
+    QWidget *stabilite = tabWidget->findChild<QWidget*>("stabilite");
+    QChartView *chartViewStabilite = stabilite->findChild<QChartView*>("chartViewStabilite");
+
+    QWidget *couleurs = tabWidget->findChild<QWidget*>("couleurs");
+    QChartView *chartViewCouleurs = couleurs->findChild<QChartView*>("chartViewCouleurs");
+
+    QWidget *temperature = tabWidget->findChild<QWidget*>("temperature");
+    QChartView *chartViewTemperature = temperature->findChild<QChartView*>("chartViewTemperature");
+
+    GenererExemplesCharts(chartViewEfficacite,chartViewStabilite,chartViewCouleurs,chartViewTemperature);
 
     principale.show();
     return a.exec();
 }
+
