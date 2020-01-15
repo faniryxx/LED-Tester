@@ -13,9 +13,17 @@ class Index : public QMainWindow
 
 public:
     Index(QWidget *parent = nullptr);
+    void ajouterPoint(double x, double y);
+    void effacerEfficacite();
+    void dessiner();
     ~Index();
+
+private slots:
+    void on_ajoutEfficacite_clicked();
+    void on_clearEfficacite_clicked();
 
 private:
     Ui::Index *ui;
+    QVector<double> efficacite_x, efficacite_y;
 };
 #endif // INDEX_H
