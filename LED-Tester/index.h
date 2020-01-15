@@ -26,6 +26,10 @@ private slots:
 
     void on_ClearStabilite_clicked();
 
+    void on_ajoutTemperature_clicked();
+
+    void on_clearTemperature_clicked();
+
 private:
     Ui::Index *ui;
     QVector<double> efficacite_x, efficacite_y;

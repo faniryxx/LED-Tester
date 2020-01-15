@@ -107,3 +107,15 @@ void Index::on_ClearStabilite_clicked()
     effacer("Stabilité");
     dessiner("Stabilité");
 }
+
+void Index::on_ajoutTemperature_clicked()
+{
+    ajouterPoint(ui->xTemp->value(),ui->yTemp->value(),"Température");
+    dessiner("Température");
+}
+
+void Index::on_clearTemperature_clicked()
+{
+    effacer("Température");
+    dessiner("Température");
+}
