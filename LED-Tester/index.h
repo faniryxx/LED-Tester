@@ -1,6 +1,5 @@
 #ifndef INDEX_H
 #define INDEX_H
-
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -17,6 +16,7 @@ public:
     void effacer(QString param);
     void dessiner(QString param);
     int genererRandom(int min, int max);
+    void demarrerTimer();
     ~Index();
 
 private slots:
@@ -27,11 +27,15 @@ private slots:
     void on_ajoutTemperature_clicked();
     void on_clearTemperature_clicked();
     void on_boutonMesure_clicked();
+    void updateGraph();
+    void arreterTimer();
 
 private:
     Ui::Index *ui;
     QVector<double> efficacite_x, efficacite_y;
     QVector<double> stabilite_x, stabilite_y;
     QVector<double> temperature_x, temperature_y;
+    QTimer *timerMesure;
+    QTimer *timerTempsRestant;
 };
 #endif // INDEX_H

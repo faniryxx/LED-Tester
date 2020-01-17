@@ -1,6 +1,7 @@
 #include "index.h"
 #include "ui_index.h"
 #include <random>
+#include <QTimer>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +17,11 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
+
+    timerMesure = new QTimer(this);
+    timerTempsRestant = new QTimer(this);
+    connect(timerMesure,SIGNAL(timeout()),this,SLOT(updateGraph()));
+    connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
 }
 
 Index::~Index()
@@ -127,14 +133,9 @@ void Index::on_clearTemperature_clicked()
     dessiner("Température");
 }
 
-int Index::genererRandom(int min, int max)
-{
-    return (qrand() % ((max + 1) - min) + min);
-}
-
 void Index::on_boutonMesure_clicked()
 {
-    switch (ui->tabWidget->currentIndex())
+    /*switch (ui->tabWidget->currentIndex())
     {
     case 0:
         for(int x=0;x<(ui->duree->value())+1;)
@@ -162,5 +163,32 @@ void Index::on_boutonMesure_clicked()
         break;
     default:
         break;
-    }
+    }*/
+
+    demarrerTimer();
 }
+
+int Index::genererRandom(int min, int max)
+{
+    return (qrand() % ((max + 1) - min) + min);
+}
+
+void Index::demarrerTimer()
+{
+    timerMesure->start((ui->intervalle->value())*1000);
+    timerTempsRestant->start((ui->duree->value())*1000);
+}
+
+void Index::arreterTimer()
+{
+    timerMesure->stop();
+    timerTempsRestant->stop();
+}
+
+void Index::updateGraph()
+{
+    ajouterPoint(((ui->duree->value()*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,60),"Efficacité");
+    dessiner("Efficacité");
+}
+
+
