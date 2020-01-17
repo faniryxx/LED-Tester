@@ -87,6 +87,7 @@ void Index::dessiner(QString param)
 void Index::on_ajoutEfficacite_clicked()
 {
     ajouterPoint(ui->xEff->value(),ui->yEff->value(),"Efficacité");
+    ui->plotEfficacite->rescaleAxes();
     dessiner("Efficacité");
 }
 
@@ -99,6 +100,7 @@ void Index::on_clearEfficacite_clicked()
 void Index::on_ajoutStabilite_clicked()
 {
     ajouterPoint(ui->xSta->value(),ui->ySta->value(),"Stabilité");
+    ui->plotStabilite->rescaleAxes();
     dessiner("Stabilité");
 }
 
@@ -111,6 +113,7 @@ void Index::on_ClearStabilite_clicked()
 void Index::on_ajoutTemperature_clicked()
 {
     ajouterPoint(ui->xTemp->value(),ui->yTemp->value(),"Température");
+    ui->plotTemperature->rescaleAxes();
     dessiner("Température");
 }
 
