@@ -1,5 +1,6 @@
 #include "index.h"
 #include "ui_index.h"
+#include <random>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -65,6 +66,7 @@ void Index::dessiner(QString param)
     if(param == "Efficacité")
     {
         ui->plotEfficacite->graph(0)->setData(efficacite_x,efficacite_y);
+        ui->plotEfficacite->rescaleAxes();
         ui->plotEfficacite->replot();
         ui->plotEfficacite->update();
     }
@@ -72,6 +74,7 @@ void Index::dessiner(QString param)
     else if(param == "Stabilité")
     {
         ui->plotStabilite->graph(0)->setData(stabilite_x,stabilite_y);
+        ui->plotStabilite->rescaleAxes();
         ui->plotStabilite->replot();
         ui->plotStabilite->update();
     }
@@ -79,6 +82,7 @@ void Index::dessiner(QString param)
     else if(param == "Température")
     {
         ui->plotTemperature->graph(0)->setData(temperature_x,temperature_y);
+        ui->plotTemperature->rescaleAxes();
         ui->plotTemperature->replot();
         ui->plotTemperature->update();
     }
@@ -121,4 +125,42 @@ void Index::on_clearTemperature_clicked()
 {
     effacer("Température");
     dessiner("Température");
+}
+
+int Index::genererRandom(int min, int max)
+{
+    return (qrand() % ((max + 1) - min) + min);
+}
+
+void Index::on_boutonMesure_clicked()
+{
+    switch (ui->tabWidget->currentIndex())
+    {
+    case 0:
+        for(int x=0;x<(ui->duree->value())+1;)
+        {
+            ajouterPoint(x,genererRandom(0,10),"Efficacité");
+            dessiner("Efficacité");
+            x=x+(ui->intervalle->value());
+        }
+        break;
+    case 1:
+        for(int x=0;x<(ui->duree->value())+1;)
+        {
+            ajouterPoint(x,genererRandom(0,10),"Stabilité");
+            dessiner("Stabilité");
+            x=x+(ui->intervalle->value());
+        }
+        break;
+    case 3:
+        for(int x=0;x<(ui->duree->value())+1;)
+        {
+            ajouterPoint(x,genererRandom(0,10),"Température");
+            dessiner("Température");
+            x=x+(ui->intervalle->value());
+        }
+        break;
+    default:
+        break;
+    }
 }
