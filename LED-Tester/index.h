@@ -17,6 +17,7 @@ public:
     void dessiner(QString param);
     int genererRandom(int min, int max);
     void demarrerTimer();
+    void nettoyerTout();
     ~Index();
 
 private slots:

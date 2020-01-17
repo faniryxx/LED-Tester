@@ -92,6 +92,12 @@ void Index::dessiner(QString param)
         ui->plotTemperature->replot();
         ui->plotTemperature->update();
     }
+    else if(param == "All")
+    {
+        dessiner("Efficacité");
+        dessiner("Stabilité");
+        dessiner("Température");
+    }
 }
 
 void Index::on_ajoutEfficacite_clicked()
@@ -135,36 +141,7 @@ void Index::on_clearTemperature_clicked()
 
 void Index::on_boutonMesure_clicked()
 {
-    /*switch (ui->tabWidget->currentIndex())
-    {
-    case 0:
-        for(int x=0;x<(ui->duree->value())+1;)
-        {
-            ajouterPoint(x,genererRandom(0,10),"Efficacité");
-            dessiner("Efficacité");
-            x=x+(ui->intervalle->value());
-        }
-        break;
-    case 1:
-        for(int x=0;x<(ui->duree->value())+1;)
-        {
-            ajouterPoint(x,genererRandom(0,10),"Stabilité");
-            dessiner("Stabilité");
-            x=x+(ui->intervalle->value());
-        }
-        break;
-    case 3:
-        for(int x=0;x<(ui->duree->value())+1;)
-        {
-            ajouterPoint(x,genererRandom(0,10),"Température");
-            dessiner("Température");
-            x=x+(ui->intervalle->value());
-        }
-        break;
-    default:
-        break;
-    }*/
-
+    nettoyerTout();
     demarrerTimer();
 }
 
@@ -179,6 +156,16 @@ void Index::demarrerTimer()
     timerTempsRestant->start((ui->duree->value())*1000);
 }
 
+void Index::nettoyerTout()
+{
+    effacer("Efficacité");
+    dessiner("Efficacité");
+    effacer("Stabilité");
+    dessiner("Stabilité");
+    effacer("Température");
+    dessiner("Température");
+}
+
 void Index::arreterTimer()
 {
     timerMesure->stop();
@@ -187,8 +174,10 @@ void Index::arreterTimer()
 
 void Index::updateGraph()
 {
-    ajouterPoint(((ui->duree->value()*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,60),"Efficacité");
-    dessiner("Efficacité");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(120,130),"Efficacité");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,50),"Stabilité");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Température");
+    dessiner("All");
 }
 
 
