@@ -78,7 +78,7 @@
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QSpinBox" name="dureeValeur">
+     <widget class="QSpinBox" name="duree">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -94,7 +94,7 @@
      </widget>
     </item>
     <item row="0" column="2">
-     <widget class="QSpinBox" name="intervalleValeur">
+     <widget class="QSpinBox" name="intervalle">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -358,8 +358,8 @@
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>ref</tabstop>
-  <tabstop>intervalleValeur</tabstop>
-  <tabstop>dureeValeur</tabstop>
+  <tabstop>intervalle</tabstop>
+  <tabstop>duree</tabstop>
   <tabstop>boutonMesure</tabstop>
  </tabstops>
  <resources/>

@@ -1,5 +1,6 @@
 #include "index.h"
 #include "ui_index.h"
+#include <random>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -65,6 +66,7 @@ void Index::dessiner(QString param)
     if(param == "Efficacité")
     {
         ui->plotEfficacite->graph(0)->setData(efficacite_x,efficacite_y);
+        ui->plotEfficacite->rescaleAxes();
         ui->plotEfficacite->replot();
         ui->plotEfficacite->update();
     }
@@ -121,4 +123,19 @@ void Index::on_clearTemperature_clicked()
 {
     effacer("Température");
     dessiner("Température");
+}
+
+int Index::genererRandom(int min, int max)
+{
+    return (qrand() % ((max + 1) - min) + min);
+}
+
+void Index::on_boutonMesure_clicked()
+{
+    for(int x=0;x<(ui->duree->value())+1;)
+    {
+        ajouterPoint(x,genererRandom(0,10),"Efficacité");
+        dessiner("Efficacité");
+        x=x+(ui->intervalle->value());
+    }
 }

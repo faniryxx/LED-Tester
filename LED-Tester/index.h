@@ -16,19 +16,17 @@ public:
     void ajouterPoint(double x, double y, QString param);
     void effacer(QString param);
     void dessiner(QString param);
+    int genererRandom(int min, int max);
     ~Index();
 
 private slots:
     void on_ajoutEfficacite_clicked();
     void on_clearEfficacite_clicked();
-
     void on_ajoutStabilite_clicked();
-
     void on_ClearStabilite_clicked();
-
     void on_ajoutTemperature_clicked();
-
     void on_clearTemperature_clicked();
+    void on_boutonMesure_clicked();
 
 private:
     Ui::Index *ui;
