@@ -100,45 +100,6 @@ void Index::dessiner(QString param)
     }
 }
 
-void Index::on_ajoutEfficacite_clicked()
-{
-    ajouterPoint(ui->xEff->value(),ui->yEff->value(),"Efficacité");
-    ui->plotEfficacite->rescaleAxes();
-    dessiner("Efficacité");
-}
-
-void Index::on_clearEfficacite_clicked()
-{
-    effacer("Efficacité");
-    dessiner("Efficacité");
-}
-
-void Index::on_ajoutStabilite_clicked()
-{
-    ajouterPoint(ui->xSta->value(),ui->ySta->value(),"Stabilité");
-    ui->plotStabilite->rescaleAxes();
-    dessiner("Stabilité");
-}
-
-void Index::on_ClearStabilite_clicked()
-{
-    effacer("Stabilité");
-    dessiner("Stabilité");
-}
-
-void Index::on_ajoutTemperature_clicked()
-{
-    ajouterPoint(ui->xTemp->value(),ui->yTemp->value(),"Température");
-    ui->plotTemperature->rescaleAxes();
-    dessiner("Température");
-}
-
-void Index::on_clearTemperature_clicked()
-{
-    effacer("Température");
-    dessiner("Température");
-}
-
 void Index::on_boutonMesure_clicked()
 {
     nettoyerTout();
@@ -179,5 +140,4 @@ void Index::updateGraph()
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Température");
     dessiner("All");
 }
-
 

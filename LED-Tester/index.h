@@ -21,12 +21,6 @@ public:
     ~Index();
 
 private slots:
-    void on_ajoutEfficacite_clicked();
-    void on_clearEfficacite_clicked();
-    void on_ajoutStabilite_clicked();
-    void on_ClearStabilite_clicked();
-    void on_ajoutTemperature_clicked();
-    void on_clearTemperature_clicked();
     void on_boutonMesure_clicked();
     void updateGraph();
     void arreterTimer();
