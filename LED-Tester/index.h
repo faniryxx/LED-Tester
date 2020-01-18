@@ -18,12 +18,15 @@ public:
     int genererRandom(int min, int max);
     void demarrerTimer();
     void nettoyerTout();
+    void enregistrerSous();
     ~Index();
 
 private slots:
     void on_boutonMesure_clicked();
     void updateGraph();
     void arreterTimer();
+
+    void on_saveButton_clicked();
 
 private:
     Ui::Index *ui;

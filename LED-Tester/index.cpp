@@ -2,6 +2,7 @@
 #include "ui_index.h"
 #include <random>
 #include <QTimer>
+#include <QFileDialog>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -141,3 +142,30 @@ void Index::updateGraph()
     dessiner("All");
 }
 
+void Index::on_saveButton_clicked()
+{
+    enregistrerSous();
+}
+
+void Index::enregistrerSous()
+{
+    //getSaveFileName ==> Boîte de dialogue 'Enregistrer sous'
+    QString fileName = QFileDialog::getSaveFileName(this,
+    tr("Enregistrer sous ..."), "",
+    tr("Fichier CSV (*.csv);;All Files (*)"));
+    if (fileName.isEmpty()) return;
+    else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            QMessageBox::information(this, tr("Impossible d'ouvrir le fichier"),file.errorString());
+            return;
+        }
+        QTextStream stream(&file);
+        stream << "Reference: " << ui->ref->text() << "\n\n";
+        stream << "Temps;Valeur efficacité;Valeur Stabilité;Valeur Température\n";
+        for(int x=0;x<efficacite_x.count();x++)
+            stream << efficacite_x.at(x) << ";" << efficacite_y.at(x) << ";" << stabilite_y.at(x) << ";" << temperature_y.at(x) << "\n";
+        file.close();
+    }
+}

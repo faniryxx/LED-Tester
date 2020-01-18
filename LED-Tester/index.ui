@@ -15,6 +15,64 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="4">
+     <widget class="QDoubleSpinBox" name="duree">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimum">
+       <double>10.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>3600.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="intervalleText">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Intervalle de mesure (s):</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLabel" name="dureeText">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Durée totale de mesure (s):</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLineEdit" name="ref">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="toolTip">
+       <string>Reference du tube</string>
+      </property>
+      <property name="placeholderText">
+       <string>Référence du tube</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="5">
      <widget class="QPushButton" name="boutonMesure">
       <property name="sizePolicy">
@@ -35,32 +93,19 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="intervalleText">
+    <item row="0" column="2">
+     <widget class="QDoubleSpinBox" name="intervalle">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="text">
-       <string>Intervalle de mesure (s):</string>
+      <property name="minimum">
+       <double>1.000000000000000</double>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLineEdit" name="ref">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="toolTip">
-       <string>Reference du tube</string>
-      </property>
-      <property name="placeholderText">
-       <string>Référence du tube</string>
+      <property name="maximum">
+       <double>30.000000000000000</double>
       </property>
      </widget>
     </item>
@@ -129,24 +174,8 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QDoubleSpinBox" name="intervalle">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimum">
-       <double>1.000000000000000</double>
-      </property>
-      <property name="maximum">
-       <double>30.000000000000000</double>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="dureeText">
+    <item row="3" column="5">
+     <widget class="QPushButton" name="saveButton">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -154,23 +183,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Durée totale de mesure (s):</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QDoubleSpinBox" name="duree">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimum">
-       <double>10.000000000000000</double>
-      </property>
-      <property name="maximum">
-       <double>3600.000000000000000</double>
+       <string>Enregistrer dans un fichier</string>
       </property>
      </widget>
     </item>
