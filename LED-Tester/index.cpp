@@ -103,8 +103,12 @@ void Index::dessiner(QString param)
 
 void Index::on_boutonMesure_clicked()
 {
-    nettoyerTout();
-    demarrerTimer();
+    if(ui->intervalle->value()<=ui->duree->value())
+    {
+        nettoyerTout();
+        demarrerTimer();
+    }
+    else QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
 }
 
 int Index::genererRandom(int min, int max)
@@ -132,13 +136,14 @@ void Index::arreterTimer()
 {
     timerMesure->stop();
     timerTempsRestant->stop();
+    QMessageBox::information(this, "Fin de la mesure", "Les mesures ont été effectuées.");
 }
 
 void Index::updateGraph()
 {
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(120,130),"Efficacité");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,50),"Stabilité");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Température");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(90,100),"Température");
     dessiner("All");
 }
 
