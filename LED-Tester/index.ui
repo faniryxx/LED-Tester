@@ -154,7 +154,11 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_6"/>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QCustomPlot" name="plotCouleurs" native="true"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

@@ -25,7 +25,6 @@ private slots:
     void on_boutonMesure_clicked();
     void updateGraph();
     void arreterTimer();
-
     void on_saveButton_clicked();
 
 private:
@@ -33,6 +32,7 @@ private:
     QVector<double> efficacite_x, efficacite_y;
     QVector<double> stabilite_x, stabilite_y;
     QVector<double> temperature_x, temperature_y;
+    QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
 };
