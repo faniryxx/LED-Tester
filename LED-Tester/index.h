@@ -20,6 +20,7 @@ public:
     void nettoyerTout();
     void enregistrerSous();
     void setReference(double efficacite, double temperature, QString reference);
+    void updateReference();
     ~Index();
 
 private slots:

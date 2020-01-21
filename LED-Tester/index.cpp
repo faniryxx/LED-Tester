@@ -179,3 +179,8 @@ void Index::setReference(double efficacite, double temperature, QString referenc
     temperatureRef = temperature;
     ref = reference;
 }
+
+void Index::updateReference()
+{
+    ui->refTubeReference->setText(ref);
+}

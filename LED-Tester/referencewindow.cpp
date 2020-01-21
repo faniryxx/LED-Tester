@@ -255,6 +255,7 @@ QString referenceWindow::getRefLineEdit()
 void referenceWindow::setReferenceParent()
 {
     papa->setReference(efficaciteRef,temperatureRef,ui->refLineEdit->text());
+    papa->updateReference();
     close();
 }
 
