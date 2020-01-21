@@ -13,17 +13,14 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
-    //ui->plotEfficacite->setInteractions(QCP::Interaction::iRangeDrag | QCP::iRangeZoom);
 
     ui->plotStabilite->addGraph();
     ui->plotStabilite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotStabilite->graph(0)->setLineStyle(QCPGraph::lsLine);
-    //ui->plotStabilite->setInteractions(QCP::Interaction::iRangeDrag | QCP::iRangeZoom);
 
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
-    //ui->plotTemperature->setInteractions(QCP::Interaction::iRangeDrag | QCP::iRangeZoom);
 
     ui->plotCouleurs->addGraph(); //rouge
     ui->plotCouleurs->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -39,7 +36,6 @@ Index::Index(QWidget *parent)
     ui->plotCouleurs->graph(2)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotCouleurs->graph(2)->setLineStyle(QCPGraph::lsLine);
     ui->plotCouleurs->graph(2)->setPen(QPen(QColor(0, 0, 209)));
-    //ui->plotCouleurs->setInteractions(QCP::Interaction::iRangeDrag | QCP::iRangeZoom);
 
     timerMesure = new QTimer(this);
     timerTempsRestant = new QTimer(this);
