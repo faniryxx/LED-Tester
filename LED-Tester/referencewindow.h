@@ -1,13 +1,13 @@
 #ifndef REFERENCEWINDOW_H
 #define REFERENCEWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class referenceWindow;
 }
 
-class referenceWindow : public QWidget
+class referenceWindow : public QDialog
 {
     Q_OBJECT
 

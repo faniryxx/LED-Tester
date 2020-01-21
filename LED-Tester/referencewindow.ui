@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>referenceWindow</class>
- <widget class="QWidget" name="referenceWindow">
+ <widget class="QDialog" name="referenceWindow">
   <property name="geometry">
    <rect>
     <x>0</x>

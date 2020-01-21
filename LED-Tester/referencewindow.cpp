@@ -5,7 +5,7 @@
 #include <QTimer>
 
 referenceWindow::referenceWindow(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::referenceWindow)
 {
     ui->setupUi(this);
