@@ -1,4 +1,5 @@
 #include "referencewindow.h"
+#include "saverefdialog.h"
 #include "ui_referencewindow.h"
 #include <random>
 #include <qcustomplot.h>
@@ -106,7 +107,9 @@ void referenceWindow::arreterTimer()
 {
     timerMesure->stop();
     timerTempsRestant->stop();
-    QMessageBox::information(this, "Fin de la mesure", "Les mesures de référence ont été effectuées. Vous pouvez décider de refaire une mesure ou d'enregistrer les précédentes.");
+    //QMessageBox::information(this, "Fin de la mesure", "Les mesures de référence ont été effectuées. Vous pouvez décider de refaire une mesure ou d'enregistrer les précédentes.");
+    saveRefDialog *dialog = new saveRefDialog();
+    dialog->show();
 }
 
 void referenceWindow::effacer(QString param)

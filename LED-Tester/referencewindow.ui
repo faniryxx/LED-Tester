@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>referenceWindow</class>
  <widget class="QDialog" name="referenceWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,6 +21,9 @@
   </property>
   <property name="windowTitle">
    <string>Enregistrer tube référence</string>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

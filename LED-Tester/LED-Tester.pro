@@ -22,16 +22,19 @@ SOURCES += \
     main.cpp \
     index.cpp \
     qcustomplot.cpp \
-    referencewindow.cpp
+    referencewindow.cpp \
+    saverefdialog.cpp
 
 HEADERS += \
     index.h \
     qcustomplot.h \
-    referencewindow.h
+    referencewindow.h \
+    saverefdialog.h
 
 FORMS += \
     index.ui \
-    referencewindow.ui
+    referencewindow.ui \
+    saverefdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
