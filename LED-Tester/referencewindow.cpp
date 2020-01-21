@@ -78,12 +78,19 @@ referenceWindow::~referenceWindow()
 
 void referenceWindow::on_mesurerRef_clicked()
 {
-    if(ui->intervalle->value()<=ui->duree->value())
+    if(ui->intervalle->value()<=ui->duree->value() && !getRefLineEdit().isEmpty())
     {
         nettoyerTout();
         demarrerTimer();
     }
-    else QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
+    else if(ui->intervalle->value()>ui->duree->value())
+    {
+        QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
+    }
+    else if(getRefLineEdit().isEmpty())
+    {
+        QMessageBox::critical(this, "Référence vide", "La référence du tube doit être spécifiée.");
+    }
 }
 
 void referenceWindow::updateGraph()

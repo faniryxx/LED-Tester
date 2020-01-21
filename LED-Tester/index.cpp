@@ -54,6 +54,8 @@ Index::Index(QWidget *parent)
     connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
 
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
+
+    ref = "";
 }
 
 Index::~Index()
@@ -101,12 +103,19 @@ void Index::dessiner(QString param)
 
 void Index::on_boutonMesure_clicked()
 {
-    if(ui->intervalle->value()<=ui->duree->value())
+    if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty())
     {
         nettoyerTout();
         demarrerTimer();
     }
-    else QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
+    else if(ui->intervalle->value()>ui->duree->value())
+    {
+        QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
+    }
+    else if(ref.isEmpty())
+    {
+        QMessageBox::critical(this, "Absence de référence", "Veuillez enregistrer un tube de référence avant de lancer la mesure.");
+    }
 }
 
 int Index::genererRandom(int min, int max)

@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Confirmer</string>
   </property>
   <property name="modal">
    <bool>false</bool>
