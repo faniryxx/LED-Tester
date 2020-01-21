@@ -23,7 +23,7 @@ private slots:
 
 private:
     Ui::saveRefDialog *ui;
-    double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
     referenceWindow *papa;
 };
 

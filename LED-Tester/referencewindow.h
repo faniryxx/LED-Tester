@@ -22,7 +22,6 @@ public:
     double calculerMoyenne(QVector<double> parametre);
     void setValeursMoyennes();
     double getEfficaciteRef();
-    double getStabiliteRef();
     double getTemperatureRef();
     QString getRefLineEdit();
     void setReferenceParent();
@@ -36,12 +35,11 @@ private slots:
 private:
     Ui::referenceWindow *ui;
     QVector<double> efficacite_x, efficacite_y;
-    QVector<double> stabilite_x, stabilite_y;
     QVector<double> temperature_x, temperature_y;
     QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
-    double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
     QString ref;
     Index *papa;
 };

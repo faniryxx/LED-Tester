@@ -23,10 +23,6 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->graph(1)->setPen(QPen(QColor(190, 190, 190)));
     //FIN TEST
 
-    ui->plotStabilite->addGraph();
-    ui->plotStabilite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
-    ui->plotStabilite->graph(0)->setLineStyle(QCPGraph::lsLine);
-
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -76,14 +72,6 @@ void Index::dessiner(QString param)
         ui->plotEfficacite->update();
     }
 
-    else if(param == "Stabilité")
-    {
-        ui->plotStabilite->graph(0)->setData(stabilite_x,stabilite_y);
-        ui->plotStabilite->rescaleAxes();
-        ui->plotStabilite->replot();
-        ui->plotStabilite->update();
-    }
-
     else if(param == "Température")
     {
         ui->plotTemperature->graph(0)->setData(temperature_x,temperature_y);
@@ -106,7 +94,6 @@ void Index::dessiner(QString param)
     else if(param == "All")
     {
         dessiner("Efficacité");
-        dessiner("Stabilité");
         dessiner("Température");
         dessiner("Couleurs");
     }
@@ -143,7 +130,6 @@ void Index::arreterTimer()
 void Index::updateGraph()
 {
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(120,130),"Efficacité");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,50),"Stabilité");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(90,100),"Température");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,255),"Rouge");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,255),"Vert");
@@ -178,9 +164,9 @@ void Index::enregistrerSous()
         }
         QTextStream stream(&file);
         stream << "Reference: " << ui->ref->text() << "\n\n";
-        stream << "Temps;Efficacite; Stabilite; RGB; Temperature\n";
+        stream << "Temps;Efficacite;  RGB; Temperature\n";
         for(int x=0;x<efficacite_x.count();x++)
-            stream << efficacite_x.at(x) << ";" << efficacite_y.at(x) << ";" << stabilite_y.at(x) << ";"
+            stream << efficacite_x.at(x) << ";" << efficacite_y.at(x) << ";"
                    << couleurs_rouge.at(x) << "-" << couleurs_vert.at(x) << "-" << couleurs_bleu.at(x) << ";"
                   << temperature_y.at(x) << "\n";
         file.close();

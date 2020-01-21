@@ -12,11 +12,6 @@ void Index::ajouterPoint(double x, double y, QString param)
         efficacite_ref_x.append(x);
         efficacite_ref_y.append(efficaciteRef);
     }
-    else if(param == "Stabilité")
-    {
-        stabilite_x.append(x);
-        stabilite_y.append(y);
-    }
     else if(param == "Température")
     {
         temperature_x.append(x);
@@ -50,11 +45,6 @@ void Index::effacer(QString param)
         efficacite_ref_x.clear();
         efficacite_ref_y.clear();
     }
-    else if(param == "Stabilité")
-    {
-        stabilite_x.clear();
-        stabilite_y.clear();
-    }
     else if(param == "Température")
     {
         temperature_x.clear();
@@ -77,8 +67,6 @@ void Index::nettoyerTout()
 {
     effacer("Efficacité");
     dessiner("Efficacité");
-    effacer("Stabilité");
-    dessiner("Stabilité");
     effacer("Température");
     dessiner("Température");
     effacer("Couleurs");

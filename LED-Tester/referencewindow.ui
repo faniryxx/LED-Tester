@@ -138,15 +138,15 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="stabilite">
+     <widget class="QWidget" name="temperature">
       <attribute name="title">
-       <string>Stabilité</string>
+       <string>Température</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5">
+      <layout class="QGridLayout" name="gridLayout_9">
        <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_4">
+        <layout class="QGridLayout" name="gridLayout_8">
          <item row="0" column="0">
-          <widget class="QCustomPlot" name="plotStabilite" native="true"/>
+          <widget class="QCustomPlot" name="plotTemperature" native="true"/>
          </item>
         </layout>
        </item>
@@ -161,20 +161,6 @@
         <layout class="QGridLayout" name="gridLayout_6">
          <item row="0" column="0">
           <widget class="QCustomPlot" name="plotCouleurs" native="true"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="temperature">
-      <attribute name="title">
-       <string>Température</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_9">
-       <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_8">
-         <item row="0" column="0">
-          <widget class="QCustomPlot" name="plotTemperature" native="true"/>
          </item>
         </layout>
        </item>

@@ -15,10 +15,6 @@ referenceWindow::referenceWindow(Index *parent) :
     ui->plotEfficacite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
 
-    ui->plotStabilite->addGraph();
-    ui->plotStabilite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
-    ui->plotStabilite->graph(0)->setLineStyle(QCPGraph::lsLine);
-
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -52,11 +48,6 @@ void referenceWindow::ajouterPoint(double x, double y, QString param)
     {
         efficacite_x.append(x);
         efficacite_y.append(y);
-    }
-    else if(param == "Stabilité")
-    {
-        stabilite_x.append(x);
-        stabilite_y.append(y);
     }
     else if(param == "Température")
     {
@@ -98,7 +89,6 @@ void referenceWindow::on_mesurerRef_clicked()
 void referenceWindow::updateGraph()
 {
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(120,130),"Efficacité");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,50),"Stabilité");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(90,100),"Température");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,255),"Rouge");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,255),"Vert");
@@ -121,11 +111,6 @@ void referenceWindow::effacer(QString param)
     {
         efficacite_x.clear();
         efficacite_y.clear();
-    }
-    else if(param == "Stabilité")
-    {
-        stabilite_x.clear();
-        stabilite_y.clear();
     }
     else if(param == "Température")
     {
@@ -153,14 +138,6 @@ void referenceWindow::dessiner(QString param)
         ui->plotEfficacite->update();
     }
 
-    else if(param == "Stabilité")
-    {
-        ui->plotStabilite->graph(0)->setData(stabilite_x,stabilite_y);
-        ui->plotStabilite->rescaleAxes();
-        ui->plotStabilite->replot();
-        ui->plotStabilite->update();
-    }
-
     else if(param == "Température")
     {
         ui->plotTemperature->graph(0)->setData(temperature_x,temperature_y);
@@ -182,7 +159,6 @@ void referenceWindow::dessiner(QString param)
     else if(param == "All")
     {
         dessiner("Efficacité");
-        dessiner("Stabilité");
         dessiner("Température");
         dessiner("Couleurs");
     }
@@ -203,8 +179,6 @@ void referenceWindow::nettoyerTout()
 {
     effacer("Efficacité");
     dessiner("Efficacité");
-    effacer("Stabilité");
-    dessiner("Stabilité");
     effacer("Température");
     dessiner("Température");
     effacer("Couleurs");
@@ -225,7 +199,6 @@ double referenceWindow::calculerMoyenne(QVector<double> parametre)
 void referenceWindow::setValeursMoyennes()
 {
     efficaciteRef = calculerMoyenne(efficacite_y);
-    stabiliteRef = calculerMoyenne(stabilite_y);
     rougeRef = calculerMoyenne(couleurs_rouge);
     vertRef = calculerMoyenne(couleurs_vert);
     bleuRef = calculerMoyenne(couleurs_bleu);
@@ -235,11 +208,6 @@ void referenceWindow::setValeursMoyennes()
 double referenceWindow::getEfficaciteRef()
 {
     return efficaciteRef;
-}
-
-double referenceWindow::getStabiliteRef()
-{
-    return stabiliteRef;
 }
 
 double referenceWindow::getTemperatureRef()

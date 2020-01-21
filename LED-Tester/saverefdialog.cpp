@@ -8,7 +8,6 @@ saveRefDialog::saveRefDialog(referenceWindow *parent) :
 {
     ui->setupUi(this);
     ui->efficaciteRefLineEdit->setText(QString::number(parent->getEfficaciteRef()));
-    ui->stabiliteRefLineEdit->setText(QString::number(parent->getStabiliteRef()));
     ui->temperatureRefLineEdit->setText(QString::number(parent->getTemperatureRef()));
     ui->refLineEdit->setText(parent->getRefLineEdit());
     papa = parent;
