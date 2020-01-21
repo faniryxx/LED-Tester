@@ -32,13 +32,13 @@ private slots:
 
 private:
     Ui::Index *ui;
-    QVector<double> efficacite_x, efficacite_y;
+    QVector<double> efficacite_x, efficacite_y, efficacite_ref_x, efficacite_ref_y;
     QVector<double> stabilite_x, stabilite_y;
-    QVector<double> temperature_x, temperature_y;
+    QVector<double> temperature_x, temperature_y, temperature_ref_x, temperature_ref_y;
     QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
     QString ref;
-    double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
 };
 #endif // INDEX_H

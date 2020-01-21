@@ -16,6 +16,12 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
+    //TEST
+    ui->plotEfficacite->addGraph();
+    ui->plotEfficacite->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
+    ui->plotEfficacite->graph(1)->setLineStyle(QCPGraph::lsLine);
+    ui->plotEfficacite->graph(1)->setPen(QPen(QColor(190, 190, 190)));
+    //FIN TEST
 
     ui->plotStabilite->addGraph();
     ui->plotStabilite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -24,6 +30,12 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
+    //TEST
+    ui->plotTemperature->addGraph();
+    ui->plotTemperature->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
+    ui->plotTemperature->graph(1)->setLineStyle(QCPGraph::lsLine);
+    ui->plotTemperature->graph(1)->setPen(QPen(QColor(190, 190, 190)));
+    //FIN TEST
 
     ui->plotCouleurs->addGraph(); //rouge
     ui->plotCouleurs->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -58,6 +70,7 @@ void Index::dessiner(QString param)
     if(param == "Efficacité")
     {
         ui->plotEfficacite->graph(0)->setData(efficacite_x,efficacite_y);
+        ui->plotEfficacite->graph(1)->setData(efficacite_ref_x,efficacite_ref_y);
         ui->plotEfficacite->rescaleAxes();
         ui->plotEfficacite->replot();
         ui->plotEfficacite->update();
@@ -74,6 +87,7 @@ void Index::dessiner(QString param)
     else if(param == "Température")
     {
         ui->plotTemperature->graph(0)->setData(temperature_x,temperature_y);
+        ui->plotTemperature->graph(1)->setData(temperature_ref_x,temperature_ref_y);
         ui->plotTemperature->rescaleAxes();
         ui->plotTemperature->replot();
         ui->plotTemperature->update();

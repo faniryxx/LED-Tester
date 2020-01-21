@@ -9,6 +9,8 @@ void Index::ajouterPoint(double x, double y, QString param)
     {
         efficacite_x.append(x);
         efficacite_y.append(y);
+        efficacite_ref_x.append(x);
+        efficacite_ref_y.append(efficaciteRef);
     }
     else if(param == "Stabilité")
     {
@@ -19,6 +21,8 @@ void Index::ajouterPoint(double x, double y, QString param)
     {
         temperature_x.append(x);
         temperature_y.append(y);
+        temperature_ref_x.append(x);
+        temperature_ref_y.append(temperatureRef);
     }
     else if(param == "Rouge")
     {
@@ -43,6 +47,8 @@ void Index::effacer(QString param)
     {
         efficacite_x.clear();
         efficacite_y.clear();
+        efficacite_ref_x.clear();
+        efficacite_ref_y.clear();
     }
     else if(param == "Stabilité")
     {
@@ -53,6 +59,8 @@ void Index::effacer(QString param)
     {
         temperature_x.clear();
         temperature_y.clear();
+        temperature_ref_x.clear();
+        temperature_ref_y.clear();
     }
     else if(param == "Couleurs")
     {
