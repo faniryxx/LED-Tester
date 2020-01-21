@@ -26,6 +26,7 @@ private slots:
     void updateGraph();
     void arreterTimer();
     void on_saveButton_clicked();
+    void ouvrirReferenceWindow();
 
 private:
     Ui::Index *ui;

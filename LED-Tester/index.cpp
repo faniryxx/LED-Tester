@@ -4,6 +4,8 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <qcustomplot.h>
+#include "referencewindow.h"
+#include <QAction>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -41,6 +43,8 @@ Index::Index(QWidget *parent)
     timerTempsRestant = new QTimer(this);
     connect(timerMesure,SIGNAL(timeout()),this,SLOT(updateGraph()));
     connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
+
+    connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
 }
 
 Index::~Index()
@@ -209,6 +213,12 @@ void Index::updateGraph()
 void Index::on_saveButton_clicked()
 {
     enregistrerSous();
+}
+
+void Index::ouvrirReferenceWindow()
+{
+    referenceWindow *ref = new referenceWindow();
+    ref->show();
 }
 
 void Index::enregistrerSous()
