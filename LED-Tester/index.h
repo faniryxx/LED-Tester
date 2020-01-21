@@ -36,5 +36,6 @@ private:
     QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
+    double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
 };
 #endif // INDEX_H

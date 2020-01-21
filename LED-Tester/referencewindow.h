@@ -1,6 +1,6 @@
 #ifndef REFERENCEWINDOW_H
 #define REFERENCEWINDOW_H
-
+#include <index.h>
 #include <QDialog>
 
 namespace Ui {
@@ -12,7 +12,7 @@ class referenceWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit referenceWindow(QWidget *parent = nullptr);
+    explicit referenceWindow(Index *parent = nullptr);
     void ajouterPoint(double x, double y, QString param);
     void effacer(QString param);
     void dessiner(QString param);
@@ -20,6 +20,10 @@ public:
     void demarrerTimer();
     void nettoyerTout();
     double calculerMoyenne(QVector<double> parametre);
+    void setValeursMoyennes();
+    double getEfficaciteRef();
+    double getStabiliteRef();
+    double getTemperatureRef();
     ~referenceWindow();
 
 private slots:
@@ -35,7 +39,7 @@ private:
     QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
-    double efficacite, stabilite, temperature, rouge, vert, bleu;
+    double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
 };
 
 #endif // REFERENCEWINDOW_H

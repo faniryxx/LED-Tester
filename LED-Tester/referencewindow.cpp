@@ -4,8 +4,9 @@
 #include <random>
 #include <qcustomplot.h>
 #include <QTimer>
+#include <index.h>
 
-referenceWindow::referenceWindow(QWidget *parent) :
+referenceWindow::referenceWindow(Index *parent) :
     QDialog(parent),
     ui(new Ui::referenceWindow)
 {
@@ -41,6 +42,7 @@ referenceWindow::referenceWindow(QWidget *parent) :
     timerTempsRestant = new QTimer(this);
     connect(timerMesure,SIGNAL(timeout()),this,SLOT(updateGraph()));
     connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
+
 }
 
 void referenceWindow::ajouterPoint(double x, double y, QString param)
@@ -108,7 +110,8 @@ void referenceWindow::arreterTimer()
     timerMesure->stop();
     timerTempsRestant->stop();
     //QMessageBox::information(this, "Fin de la mesure", "Les mesures de référence ont été effectuées. Vous pouvez décider de refaire une mesure ou d'enregistrer les précédentes.");
-    saveRefDialog *dialog = new saveRefDialog();
+    setValeursMoyennes();
+    saveRefDialog *dialog = new saveRefDialog(this);
     dialog->show();
 }
 
@@ -217,4 +220,29 @@ double referenceWindow::calculerMoyenne(QVector<double> parametre)
     }
     double moyenne = somme/parametre.count();
     return moyenne;
+}
+
+void referenceWindow::setValeursMoyennes()
+{
+    efficaciteRef = calculerMoyenne(efficacite_y);
+    stabiliteRef = calculerMoyenne(stabilite_y);
+    rougeRef = calculerMoyenne(couleurs_rouge);
+    vertRef = calculerMoyenne(couleurs_vert);
+    bleuRef = calculerMoyenne(couleurs_bleu);
+    temperatureRef = calculerMoyenne(temperature_y);
+}
+
+double referenceWindow::getEfficaciteRef()
+{
+    return efficaciteRef;
+}
+
+double referenceWindow::getStabiliteRef()
+{
+    return stabiliteRef;
+}
+
+double referenceWindow::getTemperatureRef()
+{
+    return temperatureRef;
 }
