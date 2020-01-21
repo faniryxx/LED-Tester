@@ -43,6 +43,7 @@ referenceWindow::referenceWindow(Index *parent) :
     connect(timerMesure,SIGNAL(timeout()),this,SLOT(updateGraph()));
     connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
 
+    papa=parent;
 }
 
 void referenceWindow::ajouterPoint(double x, double y, QString param)
@@ -109,7 +110,6 @@ void referenceWindow::arreterTimer()
 {
     timerMesure->stop();
     timerTempsRestant->stop();
-    //QMessageBox::information(this, "Fin de la mesure", "Les mesures de référence ont été effectuées. Vous pouvez décider de refaire une mesure ou d'enregistrer les précédentes.");
     setValeursMoyennes();
     saveRefDialog *dialog = new saveRefDialog(this);
     dialog->show();
@@ -246,3 +246,15 @@ double referenceWindow::getTemperatureRef()
 {
     return temperatureRef;
 }
+
+QString referenceWindow::getRefLineEdit()
+{
+    return ui->refLineEdit->text();
+}
+
+void referenceWindow::setReferenceParent()
+{
+    papa->setReference(efficaciteRef,temperatureRef,ui->refLineEdit->text());
+    close();
+}
+

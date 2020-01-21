@@ -16,9 +16,15 @@ public:
     explicit saveRefDialog(referenceWindow *parent = nullptr);
     ~saveRefDialog();
 
+private slots:
+    void on_annulerRef_clicked();
+
+    void on_confirmerRef_clicked();
+
 private:
     Ui::saveRefDialog *ui;
     double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    referenceWindow *papa;
 };
 
 #endif // SAVEREFDIALOG_H

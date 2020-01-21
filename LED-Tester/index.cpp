@@ -144,7 +144,7 @@ void Index::on_saveButton_clicked()
 
 void Index::ouvrirReferenceWindow()
 {
-    referenceWindow *ref = new referenceWindow();
+    referenceWindow *ref = new referenceWindow(this);
     ref->show();
 }
 
@@ -171,4 +171,11 @@ void Index::enregistrerSous()
                   << temperature_y.at(x) << "\n";
         file.close();
     }
+}
+
+void Index::setReference(double efficacite, double temperature, QString reference)
+{
+    efficaciteRef = efficacite;
+    temperatureRef = temperature;
+    ref = reference;
 }

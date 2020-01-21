@@ -19,6 +19,7 @@ public:
     void demarrerTimer();
     void nettoyerTout();
     void enregistrerSous();
+    void setReference(double efficacite, double temperature, QString reference);
     ~Index();
 
 private slots:
@@ -36,6 +37,7 @@ private:
     QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
+    QString ref;
     double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
 };
 #endif // INDEX_H

@@ -10,9 +10,22 @@ saveRefDialog::saveRefDialog(referenceWindow *parent) :
     ui->efficaciteRefLineEdit->setText(QString::number(parent->getEfficaciteRef()));
     ui->stabiliteRefLineEdit->setText(QString::number(parent->getStabiliteRef()));
     ui->temperatureRefLineEdit->setText(QString::number(parent->getTemperatureRef()));
+    ui->refLineEdit->setText(parent->getRefLineEdit());
+    papa = parent;
 }
 
 saveRefDialog::~saveRefDialog()
 {
     delete ui;
+}
+
+void saveRefDialog::on_annulerRef_clicked()
+{
+    close();
+}
+
+void saveRefDialog::on_confirmerRef_clicked()
+{
+    papa->setReferenceParent();
+    close();
 }

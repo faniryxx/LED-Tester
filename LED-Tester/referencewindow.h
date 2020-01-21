@@ -24,6 +24,8 @@ public:
     double getEfficaciteRef();
     double getStabiliteRef();
     double getTemperatureRef();
+    QString getRefLineEdit();
+    void setReferenceParent();
     ~referenceWindow();
 
 private slots:
@@ -40,6 +42,8 @@ private:
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
     double efficaciteRef, stabiliteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    QString ref;
+    Index *papa;
 };
 
 #endif // REFERENCEWINDOW_H
