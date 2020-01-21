@@ -1,5 +1,6 @@
 #include "referencewindow.h"
 #include "ui_referencewindow.h"
+#include <qcustomplot.h>
 
 referenceWindow::referenceWindow(QWidget *parent) :
     QWidget(parent),
@@ -11,4 +12,9 @@ referenceWindow::referenceWindow(QWidget *parent) :
 referenceWindow::~referenceWindow()
 {
     delete ui;
+}
+
+void referenceWindow::on_mesurerRef_clicked()
+{
+
 }

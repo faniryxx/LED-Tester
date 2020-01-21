@@ -15,6 +15,9 @@ public:
     explicit referenceWindow(QWidget *parent = nullptr);
     ~referenceWindow();
 
+private slots:
+    void on_mesurerRef_clicked();
+
 private:
     Ui::referenceWindow *ui;
 };
