@@ -26,10 +26,29 @@
    <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="4">
+    <widget class="QDoubleSpinBox" name="duree">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>3600.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>10.000000000000000</double>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLineEdit" name="refLineEdit">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -39,8 +58,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="label">
+   <item row="0" column="5">
+    <widget class="QPushButton" name="mesurerRef">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -48,14 +67,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Intervalle:</string>
+      <string>Mesurer</string>
      </property>
     </widget>
    </item>
    <item row="0" column="2">
     <widget class="QDoubleSpinBox" name="intervalle">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -81,27 +100,8 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
-    <widget class="QDoubleSpinBox" name="duree">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimum">
-      <double>1.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>3600.000000000000000</double>
-     </property>
-     <property name="value">
-      <double>10.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <widget class="QPushButton" name="mesurerRef">
+   <item row="0" column="1">
+    <widget class="QLabel" name="label">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -109,7 +109,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Mesurer</string>
+      <string>Intervalle:</string>
      </property>
     </widget>
    </item>
