@@ -21,6 +21,7 @@ public:
     void enregistrerSous();
     void setReference(double efficacite, double temperature, QString reference);
     void updateReference();
+    void showLegend();
     ~Index();
 
 private slots:

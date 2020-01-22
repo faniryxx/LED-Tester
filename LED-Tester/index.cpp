@@ -16,21 +16,27 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
+    ui->plotEfficacite->graph(0)->removeFromLegend();
+    ui->plotEfficacite->legend->setVisible(false);
     //TEST
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
     ui->plotEfficacite->graph(1)->setLineStyle(QCPGraph::lsLine);
     ui->plotEfficacite->graph(1)->setPen(QPen(QColor(190, 190, 190)));
+    ui->plotEfficacite->graph(1)->removeFromLegend();
     //FIN TEST
 
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
+    ui->plotTemperature->graph(0)->removeFromLegend();
+    ui->plotTemperature->legend->setVisible(false);
     //TEST
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
     ui->plotTemperature->graph(1)->setLineStyle(QCPGraph::lsLine);
     ui->plotTemperature->graph(1)->setPen(QPen(QColor(190, 190, 190)));
+    ui->plotTemperature->graph(1)->removeFromLegend();
     //FIN TEST
 
     ui->plotCouleurs->addGraph(); //rouge
@@ -103,7 +109,7 @@ void Index::dessiner(QString param)
 
 void Index::on_boutonMesure_clicked()
 {
-    if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty())
+    if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty() && !ui->ref->text().isEmpty())
     {
         nettoyerTout();
         demarrerTimer();
@@ -116,6 +122,10 @@ void Index::on_boutonMesure_clicked()
     {
         QMessageBox::critical(this, "Absence de référence", "Veuillez enregistrer un tube de référence avant de lancer la mesure.");
     }
+    else if(ui->ref->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Référence du tube manquant", "Veuillez entrer la référence du tube à tester avant de lancer la mesure.");
+    }
 }
 
 int Index::genererRandom(int min, int max)
@@ -125,6 +135,7 @@ int Index::genererRandom(int min, int max)
 
 void Index::demarrerTimer()
 {
+    showLegend();
     timerMesure->start((ui->intervalle->value())*1000);
     timerTempsRestant->start((ui->duree->value())*1000);
 }
@@ -173,11 +184,11 @@ void Index::enregistrerSous()
         }
         QTextStream stream(&file);
         stream << "Reference: " << ui->ref->text() << "\n\n";
-        stream << "Temps;Efficacite;  RGB; Temperature\n";
+        stream << "Temps;Efficacite;  Temperature; R-G-B\n";
         for(int x=0;x<efficacite_x.count();x++)
             stream << efficacite_x.at(x) << ";" << efficacite_y.at(x) << ";"
-                   << couleurs_rouge.at(x) << "-" << couleurs_vert.at(x) << "-" << couleurs_bleu.at(x) << ";"
-                  << temperature_y.at(x) << "\n";
+                  << temperature_y.at(x) << ";"
+                     << couleurs_rouge.at(x) << "-" << couleurs_vert.at(x) << "-" << couleurs_bleu.at(x) << "\n";
         file.close();
     }
 }
@@ -192,4 +203,19 @@ void Index::setReference(double efficacite, double temperature, QString referenc
 void Index::updateReference()
 {
     ui->refTubeReference->setText(ref);
+}
+
+void Index::showLegend()
+{
+    ui->plotEfficacite->graph(0)->setName(ui->ref->text());
+    ui->plotEfficacite->graph(1)->setName(ref);
+    ui->plotEfficacite->graph(0)->addToLegend();
+    ui->plotEfficacite->graph(1)->addToLegend();
+    ui->plotEfficacite->legend->setVisible(true);
+
+    ui->plotTemperature->graph(0)->setName(ui->ref->text());
+    ui->plotTemperature->graph(1)->setName(ref);
+    ui->plotTemperature->graph(0)->addToLegend();
+    ui->plotTemperature->graph(1)->addToLegend();
+    ui->plotTemperature->legend->setVisible(true);
 }
