@@ -6,6 +6,12 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Index; }
 QT_END_NAMESPACE
 
+struct efficacite
+{
+    double x;
+    double y;
+};
+
 class Index : public QMainWindow
 {
     Q_OBJECT
@@ -40,5 +46,6 @@ private:
     QTimer *timerTempsRestant;
     QString ref;
     double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    QList<efficacite> tableauEfficacite;
 };
 #endif // INDEX_H

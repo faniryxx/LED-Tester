@@ -1,6 +1,5 @@
 #include "index.h"
 #include "ui_index.h"
-#include "fonctionsGraph.cpp"
 #include <random>
 #include <QTimer>
 #include <QFileDialog>
@@ -18,26 +17,24 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
     ui->plotEfficacite->graph(0)->removeFromLegend();
     ui->plotEfficacite->legend->setVisible(false);
-    //TEST
+
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
     ui->plotEfficacite->graph(1)->setLineStyle(QCPGraph::lsLine);
     ui->plotEfficacite->graph(1)->setPen(QPen(QColor(190, 190, 190)));
     ui->plotEfficacite->graph(1)->removeFromLegend();
-    //FIN TEST
 
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
     ui->plotTemperature->graph(0)->removeFromLegend();
     ui->plotTemperature->legend->setVisible(false);
-    //TEST
+
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
     ui->plotTemperature->graph(1)->setLineStyle(QCPGraph::lsLine);
     ui->plotTemperature->graph(1)->setPen(QPen(QColor(190, 190, 190)));
     ui->plotTemperature->graph(1)->removeFromLegend();
-    //FIN TEST
 
     ui->plotCouleurs->addGraph(); //rouge
     ui->plotCouleurs->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -62,6 +59,8 @@ Index::Index(QWidget *parent)
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
 
     ref = "";
+
+    ui->tableView->setMo
 }
 
 Index::~Index()
@@ -218,4 +217,82 @@ void Index::showLegend()
     ui->plotTemperature->graph(0)->addToLegend();
     ui->plotTemperature->graph(1)->addToLegend();
     ui->plotTemperature->legend->setVisible(true);
+}
+
+void Index::ajouterPoint(double x, double y, QString param)
+{
+    if(param == "Efficacité")
+    {
+        efficacite_x.append(x);
+        efficacite_y.append(y);
+
+        //TEST
+        struct efficacite eff;
+        eff.x = x;
+        eff.y = y;
+        tableauEfficacite.append(eff);
+        //FINTEST
+
+        efficacite_ref_x.append(x);
+        efficacite_ref_y.append(efficaciteRef);
+    }
+    else if(param == "Température")
+    {
+        temperature_x.append(x);
+        temperature_y.append(y);
+        temperature_ref_x.append(x);
+        temperature_ref_y.append(temperatureRef);
+    }
+    else if(param == "Rouge")
+    {
+        couleurs_x_R.append(x);
+        couleurs_rouge.append(y);
+    }
+    else if(param == "Vert")
+    {
+        couleurs_x_V.append(x);
+        couleurs_vert.append(y);
+    }
+    else if(param == "Bleu")
+    {
+        couleurs_x_B.append(x);
+        couleurs_bleu.append(y);
+    }
+}
+
+void Index::effacer(QString param)
+{
+    if(param == "Efficacité")
+    {
+        efficacite_x.clear();
+        efficacite_y.clear();
+        efficacite_ref_x.clear();
+        efficacite_ref_y.clear();
+    }
+    else if(param == "Température")
+    {
+        temperature_x.clear();
+        temperature_y.clear();
+        temperature_ref_x.clear();
+        temperature_ref_y.clear();
+    }
+    else if(param == "Couleurs")
+    {
+        couleurs_x_R.clear();
+        couleurs_x_V.clear();
+        couleurs_x_B.clear();
+        couleurs_rouge.clear();
+        couleurs_vert.clear();
+        couleurs_bleu.clear();
+    }
+}
+
+void Index::nettoyerTout()
+{
+    effacer("Efficacité");
+    dessiner("Efficacité");
+    effacer("Température");
+    dessiner("Température");
+    effacer("Couleurs");
+    dessiner("Couleurs");
 }
