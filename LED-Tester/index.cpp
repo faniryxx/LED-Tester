@@ -62,11 +62,9 @@ Index::Index(QWidget *parent)
 
     QStringList headers;
     headers << "Temps" << "Luminosité" << "Température" << "Teinte rouge" << "Teinte verte" << "Teinte bleue" ;
-    //ui->tableWidget->setRowCount(10);
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
-    //ui->tableWidget->insertRow(1);
-    ui->tableWidget->setItem(0,0, new QTableWidgetItem("Hello"));
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 Index::~Index()
@@ -83,15 +81,6 @@ void Index::dessiner(QString param)
         ui->plotEfficacite->rescaleAxes();
         ui->plotEfficacite->replot();
         ui->plotEfficacite->update();
-
-        int currentRowCount = ui->tableWidget->rowCount();
-        QString test;
-        if(efficacite_x.count()!=0){
-            ui->tableWidget->setRowCount(currentRowCount+1);
-            double lastValue = efficacite_x.last();
-            test = QString("%1").arg(lastValue);
-            ui->tableWidget->setItem(currentRowCount,0, new QTableWidgetItem(test));
-        }
     }
 
     else if(param == "Température")
@@ -118,6 +107,32 @@ void Index::dessiner(QString param)
         dessiner("Efficacité");
         dessiner("Température");
         dessiner("Couleurs");
+
+        int currentRowCount = ui->tableWidget->rowCount();
+        QString tempsString,effString,tempString,rougeString,vertString,bleuString;
+        if(efficacite_x.count()!=0){
+            ui->tableWidget->setRowCount(currentRowCount+1);
+            double lastValue = efficacite_x.last();
+            tempsString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,0, new QTableWidgetItem(tempsString));
+            lastValue = efficacite_y.last();
+            effString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,1, new QTableWidgetItem(effString));
+            lastValue = temperature_y.last();
+            tempString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,2, new QTableWidgetItem(tempString));
+            lastValue = couleurs_rouge.last();
+            rougeString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,3, new QTableWidgetItem(rougeString));
+            lastValue = couleurs_vert.last();
+            vertString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,4, new QTableWidgetItem(vertString));
+            lastValue = couleurs_bleu.last();
+            bleuString = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,5, new QTableWidgetItem(bleuString));
+
+            ui->tableWidget->scrollToBottom();
+        }
     }
 }
 
