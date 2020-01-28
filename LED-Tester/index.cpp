@@ -60,7 +60,13 @@ Index::Index(QWidget *parent)
 
     ref = "";
 
-    ui->tableView->setMo
+    QStringList headers;
+    headers << "Temps" << "Luminosité" << "Température" << "Teinte rouge" << "Teinte verte" << "Teinte bleue" ;
+    //ui->tableWidget->setRowCount(10);
+    //ui->tableWidget->verticalHeader()->setVisible(false);
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+    //ui->tableWidget->insertRow(1);
+    ui->tableWidget->setItem(0,0, new QTableWidgetItem("Hello"));
 }
 
 Index::~Index()
