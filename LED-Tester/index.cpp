@@ -63,7 +63,7 @@ Index::Index(QWidget *parent)
     QStringList headers;
     headers << "Temps" << "Luminosité" << "Température" << "Teinte rouge" << "Teinte verte" << "Teinte bleue" ;
     //ui->tableWidget->setRowCount(10);
-    //ui->tableWidget->verticalHeader()->setVisible(false);
+    ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     //ui->tableWidget->insertRow(1);
     ui->tableWidget->setItem(0,0, new QTableWidgetItem("Hello"));
@@ -83,6 +83,15 @@ void Index::dessiner(QString param)
         ui->plotEfficacite->rescaleAxes();
         ui->plotEfficacite->replot();
         ui->plotEfficacite->update();
+
+        int currentRowCount = ui->tableWidget->rowCount();
+        QString test;
+        if(efficacite_x.count()!=0){
+            ui->tableWidget->setRowCount(currentRowCount+1);
+            double lastValue = efficacite_x.last();
+            test = QString("%1").arg(lastValue);
+            ui->tableWidget->setItem(currentRowCount,0, new QTableWidgetItem(test));
+        }
     }
 
     else if(param == "Température")
@@ -232,12 +241,12 @@ void Index::ajouterPoint(double x, double y, QString param)
         efficacite_x.append(x);
         efficacite_y.append(y);
 
-        //TEST
+        /*//TEST
         struct efficacite eff;
         eff.x = x;
         eff.y = y;
         tableauEfficacite.append(eff);
-        //FINTEST
+        //FINTEST*/
 
         efficacite_ref_x.append(x);
         efficacite_ref_y.append(efficaciteRef);
