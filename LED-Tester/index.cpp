@@ -205,8 +205,13 @@ void Index::ouvrirReferenceWindow()
 
 void Index::ouvrirMenuPorts()
 {
+    if(!QSerialPortInfo::availablePorts().isEmpty())
+    {
     MenuPorts *menuPort = new MenuPorts(this);
     menuPort->exec();
+       }
+    else
+        QMessageBox::critical(this,"Erreur","Aucun port COM n'a été détecté.");
 }
 
 void Index::enregistrerSous()
