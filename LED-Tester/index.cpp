@@ -6,6 +6,8 @@
 #include <qcustomplot.h>
 #include "referencewindow.h"
 #include <QAction>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)

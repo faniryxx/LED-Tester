@@ -1,6 +1,6 @@
 QT       += core gui
 QT += charts
-QT += gui printsupport
+QT += gui printsupport serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
