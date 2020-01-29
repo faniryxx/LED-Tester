@@ -287,12 +287,30 @@
     </property>
     <addaction name="ajoutRef"/>
    </widget>
+   <widget class="QMenu" name="menuParametres">
+    <property name="title">
+     <string>Paramètres</string>
+    </property>
+    <widget class="QMenu" name="menuPort">
+     <property name="title">
+      <string>Port</string>
+     </property>
+     <addaction name="actionAucun"/>
+    </widget>
+    <addaction name="menuPort"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuParametres"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="ajoutRef">
    <property name="text">
     <string>Ajouter un tube référence</string>
+   </property>
+  </action>
+  <action name="actionAucun">
+   <property name="text">
+    <string>Aucun</string>
    </property>
   </action>
  </widget>

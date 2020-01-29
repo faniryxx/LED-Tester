@@ -6,6 +6,8 @@
 #include <qcustomplot.h>
 #include "referencewindow.h"
 #include <QAction>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
@@ -65,6 +67,10 @@ Index::Index(QWidget *parent)
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()) {
+        ui->menuPort->addAction(new QAction(port.portName()));
+    }
 }
 
 Index::~Index()
