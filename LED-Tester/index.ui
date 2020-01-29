@@ -287,13 +287,7 @@
     </property>
     <addaction name="ajoutRef"/>
    </widget>
-   <widget class="QMenu" name="menuParametres">
-    <property name="title">
-     <string>Paramètres</string>
-    </property>
-   </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuParametres"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="ajoutRef">
