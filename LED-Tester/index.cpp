@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <qcustomplot.h>
 #include "referencewindow.h"
+#include "menuports.h"
 #include <QAction>
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -59,6 +60,9 @@ Index::Index(QWidget *parent)
     connect(timerTempsRestant,SIGNAL(timeout()),this,SLOT(arreterTimer()));
 
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
+    connect(ui->actionPorts, SIGNAL(triggered()), this, SLOT(ouvrirMenuPorts()));
+
+    portUtilise = new QSerialPort(this);
 
     ref = "";
 
@@ -67,10 +71,6 @@ Index::Index(QWidget *parent)
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-    Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()) {
-        ui->menuPort->addAction(new QAction(port.portName()));
-    }
 }
 
 Index::~Index()
@@ -203,6 +203,12 @@ void Index::ouvrirReferenceWindow()
     ref->show();
 }
 
+void Index::ouvrirMenuPorts()
+{
+    MenuPorts *menuPort = new MenuPorts(this);
+    menuPort->exec();
+}
+
 void Index::enregistrerSous()
 {
     //getSaveFileName ==> Boîte de dialogue 'Enregistrer sous'
@@ -253,6 +259,15 @@ void Index::showLegend()
     ui->plotTemperature->graph(0)->addToLegend();
     ui->plotTemperature->graph(1)->addToLegend();
     ui->plotTemperature->legend->setVisible(true);
+}
+
+void Index::getSelectPortName(QString portName)
+{
+    Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts())
+    {
+        if(portName == port.portName()) portUtilise->setPort(port);
+    }
+    ui->portSelect->setText(portUtilise->portName());
 }
 
 void Index::ajouterPoint(double x, double y, QString param)

@@ -3,13 +3,13 @@
  <class>referenceWindow</class>
  <widget class="QDialog" name="referenceWindow">
   <property name="windowModality">
-   <enum>Qt::NonModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
+    <width>613</width>
     <height>358</height>
    </rect>
   </property>
@@ -23,7 +23,7 @@
    <string>Enregistrer tube référence</string>
   </property>
   <property name="modal">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="4">

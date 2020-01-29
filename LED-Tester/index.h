@@ -1,6 +1,7 @@
 #ifndef INDEX_H
 #define INDEX_H
 #include <QMainWindow>
+#include <QSerialPort>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Index; }
@@ -28,6 +29,7 @@ public:
     void setReference(double efficacite, double temperature, QString reference);
     void updateReference();
     void showLegend();
+    void getSelectPortName(QString portName);
     ~Index();
 
 private slots:
@@ -36,6 +38,7 @@ private slots:
     void arreterTimer();
     void on_saveButton_clicked();
     void ouvrirReferenceWindow();
+    void ouvrirMenuPorts();
 
 private:
     Ui::Index *ui;
@@ -47,5 +50,6 @@ private:
     QString ref;
     double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
     QList<efficacite> tableauEfficacite;
+    QSerialPort *portUtilise;
 };
 #endif // INDEX_H

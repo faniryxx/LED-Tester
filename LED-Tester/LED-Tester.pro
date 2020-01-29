@@ -20,18 +20,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     index.cpp \
+    menuports.cpp \
     qcustomplot.cpp \
     referencewindow.cpp \
     saverefdialog.cpp
 
 HEADERS += \
     index.h \
+    menuports.h \
     qcustomplot.h \
     referencewindow.h \
     saverefdialog.h
 
 FORMS += \
     index.ui \
+    menuports.ui \
     referencewindow.ui \
     saverefdialog.ui
 

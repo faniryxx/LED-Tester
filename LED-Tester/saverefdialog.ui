@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>saveRefDialog</class>
  <widget class="QDialog" name="saveRefDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
+    <width>554</width>
     <height>186</height>
    </rect>
   </property>
@@ -20,7 +23,7 @@
    <string>Confirmer</string>
   </property>
   <property name="modal">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="4" column="0" colspan="2">
