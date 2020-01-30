@@ -68,8 +68,8 @@ Index::Index(QWidget *parent)
 
     QStringList headers;
     headers << "Temps" << "Luminosité" << "Température" << "Teinte rouge" << "Teinte verte" << "Teinte bleue" ;
-    ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
+    ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
@@ -116,6 +116,7 @@ void Index::dessiner(QString param)
 
         int currentRowCount = ui->tableWidget->rowCount();
         QString tempsString,effString,tempString,rougeString,vertString,bleuString;
+
         if(efficacite_x.count()!=0){
             ui->tableWidget->setRowCount(currentRowCount+1);
             double lastValue = efficacite_x.last();
@@ -351,4 +352,6 @@ void Index::nettoyerTout()
     dessiner("Température");
     effacer("Couleurs");
     dessiner("Couleurs");
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
 }
