@@ -191,7 +191,7 @@
              <enum>QTabWidget::East</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tableau">
              <attribute name="title">
@@ -323,6 +323,8 @@
     <addaction name="ajoutRef"/>
     <addaction name="separator"/>
     <addaction name="actionPorts"/>
+    <addaction name="separator"/>
+    <addaction name="imprimer"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -335,6 +337,11 @@
   <action name="actionPorts">
    <property name="text">
     <string>Ports</string>
+   </property>
+  </action>
+  <action name="imprimer">
+   <property name="text">
+    <string>Imprimer (PDF)</string>
    </property>
   </action>
  </widget>

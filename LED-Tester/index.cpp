@@ -61,6 +61,7 @@ Index::Index(QWidget *parent)
 
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
     connect(ui->actionPorts, SIGNAL(triggered()), this, SLOT(ouvrirMenuPorts()));
+    connect(ui->imprimer, SIGNAL(triggered()), this, SLOT(impression()));
 
     portUtilise = new QSerialPort(this);
 
@@ -213,6 +214,28 @@ void Index::ouvrirMenuPorts()
        }
     else
         QMessageBox::critical(this,"Erreur","Aucun port COM n'a été détecté.");
+}
+
+void Index::impression()
+{
+    int pageWidth,pageHeight,size;
+    QRect viewport;
+
+    QPrinter printer;
+    printer.setOutputFileName("./output.pdf");
+    printer.setOutputFormat(QPrinter::PdfFormat);
+
+    QCPPainter painter(&printer);
+    //painter.setMode(QCPPainter::pmNoCaching);
+    viewport = ui->plotEfficacite->viewport();
+    ui->plotEfficacite->setViewport(printer.pageRect());
+    pageWidth = printer.pageRect(QPrinter::DevicePixel).width();
+    pageHeight = printer.pageRect(QPrinter::DevicePixel).height();
+    size = (pageWidth < pageHeight) ? pageWidth : pageHeight;
+    ui->plotEfficacite->toPainter(&painter, size, size*9/16);
+    //ui->plotEfficacite->toPainter(&painter);
+    painter.end();
+    ui->plotEfficacite->setViewport(viewport);
 }
 
 void Index::enregistrerSous()

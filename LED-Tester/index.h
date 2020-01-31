@@ -39,6 +39,7 @@ private slots:
     void on_saveButton_clicked();
     void ouvrirReferenceWindow();
     void ouvrirMenuPorts();
+    void impression();
 
 private:
     Ui::Index *ui;
