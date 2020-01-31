@@ -20,6 +20,8 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->graph(0)->setLineStyle(QCPGraph::lsLine);
     ui->plotEfficacite->graph(0)->removeFromLegend();
     ui->plotEfficacite->legend->setVisible(false);
+    ui->plotEfficacite->xAxis->setLabel("Temps");
+    ui->plotEfficacite->yAxis->setLabel("Luminosité");
 
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
@@ -32,6 +34,8 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
     ui->plotTemperature->graph(0)->removeFromLegend();
     ui->plotTemperature->legend->setVisible(false);
+    ui->plotTemperature->xAxis->setLabel("Temps");
+    ui->plotTemperature->yAxis->setLabel("Température");
 
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
@@ -53,6 +57,8 @@ Index::Index(QWidget *parent)
     ui->plotCouleurs->graph(2)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotCouleurs->graph(2)->setLineStyle(QCPGraph::lsLine);
     ui->plotCouleurs->graph(2)->setPen(QPen(QColor(0, 0, 209)));
+    ui->plotCouleurs->xAxis->setLabel("Temps");
+    ui->plotCouleurs->yAxis->setLabel("Valeur (RGB)");
 
     timerMesure = new QTimer(this);
     timerTempsRestant = new QTimer(this);
@@ -232,7 +238,7 @@ void Index::impression()
     pageWidth = printer.pageRect(QPrinter::DevicePixel).width();
     pageHeight = printer.pageRect(QPrinter::DevicePixel).height();
     size = (pageWidth < pageHeight) ? pageWidth : pageHeight;
-    ui->plotEfficacite->toPainter(&painter, size, size*9/16);
+    ui->plotEfficacite->toPainter(&painter, size, size*9/19);
     //ui->plotEfficacite->toPainter(&painter);
     painter.end();
     ui->plotEfficacite->setViewport(viewport);
