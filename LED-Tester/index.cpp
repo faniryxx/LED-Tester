@@ -234,25 +234,11 @@ void Index::enregistrement()
     QPrinter printer;
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOrientation(QPrinter::Landscape);
-    //printer.setFullPage(true);
 
     printer.setOutputFileName(fileName);
     printer.setPaperSize(QPrinter::A4);
     printer.setPageSize(QPrinter::A4);
-    //QMarginsF *margins = new QMarginsF(10,10,10,10);
     printer.setPageMargins(10,10,10,10,QPrinter::Millimeter);
-
-    /*
-    QCPPainter painter(&printer);
-    viewport = ui->plotEfficacite->viewport();
-    ui->plotEfficacite->setViewport(printer.pageRect());
-    pageWidth = printer.pageRect(QPrinter::DevicePixel).width();
-    pageHeight = printer.pageRect(QPrinter::DevicePixel).height();
-    size = (pageWidth < pageHeight) ? pageWidth : pageHeight;
-    ui->plotEfficacite->toPainter(&painter, size, size*9/19);
-
-    painter.end();
-    ui->plotEfficacite->setViewport(viewport);*/
 
     QCPPainter painter(&printer);
 
