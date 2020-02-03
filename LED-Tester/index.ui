@@ -49,7 +49,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Enregistrer dans un fichier</string>
+       <string>Exporter les valeurs dans un fichier Excel</string>
       </property>
      </widget>
     </item>
@@ -324,7 +324,7 @@
     <addaction name="separator"/>
     <addaction name="actionPorts"/>
     <addaction name="separator"/>
-    <addaction name="imprimer"/>
+    <addaction name="enregistrer"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -339,9 +339,9 @@
     <string>Ports</string>
    </property>
   </action>
-  <action name="imprimer">
+  <action name="enregistrer">
    <property name="text">
-    <string>Imprimer (PDF)</string>
+    <string>Enregistrer les graphes</string>
    </property>
   </action>
  </widget>

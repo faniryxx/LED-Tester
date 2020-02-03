@@ -67,7 +67,7 @@ Index::Index(QWidget *parent)
 
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
     connect(ui->actionPorts, SIGNAL(triggered()), this, SLOT(ouvrirMenuPorts()));
-    connect(ui->imprimer, SIGNAL(triggered()), this, SLOT(impression()));
+    connect(ui->enregistrer, SIGNAL(triggered()), this, SLOT(enregistrement()));
 
     portUtilise = new QSerialPort(this);
 
@@ -222,16 +222,21 @@ void Index::ouvrirMenuPorts()
         QMessageBox::critical(this,"Erreur","Aucun port COM n'a été détecté.");
 }
 
-void Index::impression()
+void Index::enregistrement()
 {
     int pageWidth,pageHeight,size;
     QRect viewport;
+
+    QString fileName = QFileDialog::getSaveFileName(this,
+    tr("Enregistrer sous ..."), "",
+    tr("Fichier PDF (*.pdf);;All Files (*)"));
 
     QPrinter printer;
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOrientation(QPrinter::Landscape);
     //printer.setFullPage(true);
-    printer.setOutputFileName("./output.pdf");
+
+    printer.setOutputFileName(fileName);
     printer.setPaperSize(QPrinter::A4);
     printer.setPageSize(QPrinter::A4);
     //QMarginsF *margins = new QMarginsF(10,10,10,10);
@@ -250,6 +255,7 @@ void Index::impression()
     ui->plotEfficacite->setViewport(viewport);*/
 
     QCPPainter painter(&printer);
+
     ui->plotEfficacite->toPainter(&painter,printer.width(),printer.height());
     printer.newPage();
     ui->plotTemperature->toPainter(&painter,printer.width(),printer.height());
