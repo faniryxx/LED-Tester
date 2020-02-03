@@ -228,20 +228,23 @@ void Index::impression()
     QRect viewport;
 
     QPrinter printer;
+    printer.setOrientation(QPrinter::Landscape);
+    printer.setFullPage(true);
     printer.setOutputFileName("./output.pdf");
     printer.setOutputFormat(QPrinter::PdfFormat);
 
     QCPPainter painter(&printer);
-    //painter.setMode(QCPPainter::pmNoCaching);
     viewport = ui->plotEfficacite->viewport();
     ui->plotEfficacite->setViewport(printer.pageRect());
     pageWidth = printer.pageRect(QPrinter::DevicePixel).width();
     pageHeight = printer.pageRect(QPrinter::DevicePixel).height();
     size = (pageWidth < pageHeight) ? pageWidth : pageHeight;
     ui->plotEfficacite->toPainter(&painter, size, size*9/19);
-    //ui->plotEfficacite->toPainter(&painter);
+
     painter.end();
     ui->plotEfficacite->setViewport(viewport);
+
+
 }
 
 void Index::enregistrerSous()
