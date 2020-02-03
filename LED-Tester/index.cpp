@@ -228,11 +228,16 @@ void Index::impression()
     QRect viewport;
 
     QPrinter printer;
-    printer.setOrientation(QPrinter::Landscape);
-    printer.setFullPage(true);
-    printer.setOutputFileName("./output.pdf");
     printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOrientation(QPrinter::Landscape);
+    //printer.setFullPage(true);
+    printer.setOutputFileName("./output.pdf");
+    printer.setPaperSize(QPrinter::A4);
+    printer.setPageSize(QPrinter::A4);
+    //QMarginsF *margins = new QMarginsF(10,10,10,10);
+    printer.setPageMargins(10,10,10,10,QPrinter::Millimeter);
 
+    /*
     QCPPainter painter(&printer);
     viewport = ui->plotEfficacite->viewport();
     ui->plotEfficacite->setViewport(printer.pageRect());
@@ -242,9 +247,16 @@ void Index::impression()
     ui->plotEfficacite->toPainter(&painter, size, size*9/19);
 
     painter.end();
-    ui->plotEfficacite->setViewport(viewport);
+    ui->plotEfficacite->setViewport(viewport);*/
 
+    QCPPainter painter(&printer);
+    ui->plotEfficacite->toPainter(&painter,printer.width(),printer.height());
+    printer.newPage();
+    ui->plotTemperature->toPainter(&painter,printer.width(),printer.height());
+    printer.newPage();
+    ui->plotCouleurs->toPainter(&painter,printer.width(),printer.height());
 
+    painter.end();
 }
 
 void Index::enregistrerSous()
