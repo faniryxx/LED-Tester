@@ -235,7 +235,7 @@ void Index::enregistrement()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
     tr("Enregistrer sous ..."), "",
-    tr("Fichier PDF (*.pdf);;All Files (*)"));
+    tr("DOCUMENT PDF (*.pdf);;All Files (*)"));
 
     QPrinter printer;
     printer.setOutputFormat(QPrinter::PdfFormat);
@@ -288,7 +288,7 @@ void Index::enregistrerSous()
     //getSaveFileName ==> Boîte de dialogue 'Enregistrer sous'
     QString fileName = QFileDialog::getSaveFileName(this,
     tr("Enregistrer sous ..."), "",
-    tr("Fichier CSV (*.csv);;All Files (*)"));
+    tr("DOCUMENT CSV (*.csv);;All Files (*)"));
     if (fileName.isEmpty()) return;
     else {
         QFile file(fileName);
