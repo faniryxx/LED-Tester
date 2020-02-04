@@ -269,7 +269,6 @@ void Index::impression()
 void Index::printPreview(QPrinter *printer)
 {
     printer->setOutputFormat(QPrinter::NativeFormat);
-    //printer->setPageMargins(10,10,10,10, QPrinter::Millimeter);
 
     QCPPainter painter(printer);
 
