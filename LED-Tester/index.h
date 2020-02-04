@@ -39,6 +39,7 @@ public:
     void updateReference();
     void showLegend();
     void getSelectPortName(QString portName);
+    bool getBlueModeState(){return blueMode;}
     ~Index();
 
 private slots:
@@ -51,6 +52,8 @@ private slots:
     void enregistrement();
     void impression();
     void printPreview(QPrinter *);
+    void setBlueMode();
+    void setLightMode();
 
 private:
     Ui::Index *ui;
@@ -63,5 +66,6 @@ private:
     double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
     QList<efficacite> tableauEfficacite;
     QSerialPort *portUtilise;
+    bool blueMode;
 };
 #endif // INDEX_H

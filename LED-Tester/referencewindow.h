@@ -34,6 +34,8 @@ public:
     QString getRefLineEdit();
     void setReferenceParent();
     ~referenceWindow();
+    void setBlueMode();
+    void setLightMode();
 
 private slots:
     void on_mesurerRef_clicked();

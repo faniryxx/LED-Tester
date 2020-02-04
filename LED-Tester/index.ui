@@ -313,7 +313,7 @@
      <x>0</x>
      <y>0</y>
      <width>1083</width>
-     <height>30</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -327,9 +327,14 @@
     <addaction name="enregistrer"/>
     <addaction name="imprimer"/>
    </widget>
+   <widget class="QMenu" name="menuAffichage">
+    <property name="title">
+     <string>Affichage</string>
+    </property>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuAffichage"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="ajoutRef">
    <property name="text">
     <string>Ajouter un tube référence</string>
@@ -348,6 +353,31 @@
   <action name="imprimer">
    <property name="text">
     <string>Aperçu avant impression</string>
+   </property>
+  </action>
+  <action name="actionPar_d_faut">
+   <property name="text">
+    <string>Par défaut</string>
+   </property>
+  </action>
+  <action name="actionSombre">
+   <property name="text">
+    <string>Sombre</string>
+   </property>
+  </action>
+  <action name="actionTh_me_de_l_application">
+   <property name="text">
+    <string>Thème de l'application</string>
+   </property>
+  </action>
+  <action name="actionPar_d_faut_2">
+   <property name="text">
+    <string>Par défaut</string>
+   </property>
+  </action>
+  <action name="actionSombre_2">
+   <property name="text">
+    <string>Sombre</string>
    </property>
   </action>
  </widget>

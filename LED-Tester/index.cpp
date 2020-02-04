@@ -21,7 +21,7 @@
 Index::Index(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Index)
-{
+{    
     ui->setupUi(this);
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
@@ -30,6 +30,7 @@ Index::Index(QWidget *parent)
     ui->plotEfficacite->legend->setVisible(false);
     ui->plotEfficacite->xAxis->setLabel("Temps");
     ui->plotEfficacite->yAxis->setLabel("Luminosité");
+    ui->plotEfficacite->graph(0)->setPen(QPen(Qt::cyan));
 
     ui->plotEfficacite->addGraph();
     ui->plotEfficacite->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
@@ -44,6 +45,7 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->legend->setVisible(false);
     ui->plotTemperature->xAxis->setLabel("Temps");
     ui->plotTemperature->yAxis->setLabel("Température");
+    ui->plotTemperature->graph(0)->setPen(QPen(Qt::cyan));
 
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(1)->setScatterStyle(QCPScatterStyle::ssDot);
@@ -87,11 +89,175 @@ Index::Index(QWidget *parent)
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+
+
+    QMenu *selectionThemeMenu = ui->menuAffichage->addMenu(tr("Sélection du thème"));
+    QAction *action = new QAction();
+
+    QActionGroup *themeGroup = new QActionGroup(this);
+    themeGroup->setExclusive(true);
+
+    action = selectionThemeMenu->addAction("Thème par défaut");
+    connect(action,SIGNAL(triggered()),this,SLOT(setLightMode()));
+    action->setCheckable(true);
+    action->setChecked(true);
+    themeGroup->addAction(action);
+
+    action = selectionThemeMenu->addAction("Bleu minéral");
+    connect(action,SIGNAL(triggered()),this,SLOT(setBlueMode()));
+    action->setCheckable(true);
+    themeGroup->addAction(action);
+
+    blueMode=false;
 }
 
 Index::~Index()
 {
     delete ui;
+}
+
+void Index::setLightMode()
+{
+    ui->plotEfficacite->xAxis->setBasePen(QPen(Qt::black));
+    ui->plotEfficacite->yAxis->setBasePen(QPen(Qt::black));
+    ui->plotEfficacite->xAxis->setTickPen(QPen(Qt::black));
+    ui->plotEfficacite->yAxis->setTickPen(QPen(Qt::black));
+    ui->plotEfficacite->xAxis->setLabelColor(Qt::black);
+    ui->plotEfficacite->yAxis->setLabelColor(Qt::black);
+    ui->plotEfficacite->xAxis->setTickLabelColor(Qt::black);
+    ui->plotEfficacite->yAxis->setTickLabelColor(Qt::black);
+    ui->plotEfficacite->xAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotEfficacite->yAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotEfficacite->setBackground(*new QBrush(Qt::white));
+    ui->plotEfficacite->axisRect()->setBackground(*new QBrush(Qt::white));
+    ui->plotEfficacite->legend->setBrush(QBrush(Qt::white));
+    ui->plotEfficacite->legend->setTextColor(Qt::black);
+
+    ui->plotTemperature->xAxis->setBasePen(QPen(Qt::black));
+    ui->plotTemperature->yAxis->setBasePen(QPen(Qt::black));
+    ui->plotTemperature->xAxis->setTickPen(QPen(Qt::black));
+    ui->plotTemperature->yAxis->setTickPen(QPen(Qt::black));
+    ui->plotTemperature->xAxis->setLabelColor(Qt::black);
+    ui->plotTemperature->yAxis->setLabelColor(Qt::black);
+    ui->plotTemperature->xAxis->setTickLabelColor(Qt::black);
+    ui->plotTemperature->yAxis->setTickLabelColor(Qt::black);
+    ui->plotTemperature->xAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotTemperature->yAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotTemperature->setBackground(*new QBrush(Qt::white));
+    ui->plotTemperature->axisRect()->setBackground(*new QBrush(Qt::white));
+    ui->plotTemperature->legend->setBrush(QBrush(Qt::white));
+    ui->plotTemperature->legend->setTextColor(Qt::black);
+
+    ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::black));
+    ui->plotCouleurs->yAxis->setBasePen(QPen(Qt::black));
+    ui->plotCouleurs->xAxis->setTickPen(QPen(Qt::black));
+    ui->plotCouleurs->yAxis->setTickPen(QPen(Qt::black));
+    ui->plotCouleurs->xAxis->setLabelColor(Qt::black);
+    ui->plotCouleurs->yAxis->setLabelColor(Qt::black);
+    ui->plotCouleurs->xAxis->setTickLabelColor(Qt::black);
+    ui->plotCouleurs->yAxis->setTickLabelColor(Qt::black);
+    ui->plotCouleurs->xAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotCouleurs->yAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
+    ui->plotCouleurs->setBackground(*new QBrush(Qt::white));
+    ui->plotCouleurs->axisRect()->setBackground(*new QBrush(Qt::white));
+    ui->plotCouleurs->legend->setBrush(QBrush(Qt::white));
+    ui->plotCouleurs->legend->setTextColor(Qt::black);
+
+    ui->plotEfficacite->rescaleAxes();
+    ui->plotEfficacite->replot();
+    ui->plotEfficacite->update();
+    ui->plotCouleurs->rescaleAxes();
+    ui->plotCouleurs->replot();
+    ui->plotCouleurs->update();
+    ui->plotTemperature->rescaleAxes();
+    ui->plotTemperature->replot();
+    ui->plotTemperature->update();
+
+    qApp->setStyleSheet("");
+    blueMode=false;
+}
+
+void Index::setBlueMode()
+{
+    ui->plotEfficacite->xAxis->setBasePen(QPen(Qt::white));
+    ui->plotEfficacite->yAxis->setBasePen(QPen(Qt::white));
+    ui->plotEfficacite->xAxis->setTickPen(QPen(Qt::white));
+    ui->plotEfficacite->yAxis->setTickPen(QPen(Qt::white));
+    ui->plotEfficacite->xAxis->setLabelColor(Qt::white);
+    ui->plotEfficacite->yAxis->setLabelColor(Qt::white);
+    ui->plotEfficacite->xAxis->setTickLabelColor(Qt::white);
+    ui->plotEfficacite->yAxis->setTickLabelColor(Qt::white);
+    ui->plotEfficacite->xAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotEfficacite->yAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotEfficacite->legend->setBrush(QBrush(QColor(40,50,60)));
+    ui->plotEfficacite->legend->setTextColor(Qt::white);
+    QLinearGradient plotGradient; //dégradé fond
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(45,55,65));
+    plotGradient.setColorAt(0.5, QColor(40,50,60));
+    plotGradient.setColorAt(1, QColor(25,35,45));
+    ui->plotEfficacite->setBackground(plotGradient);
+    QLinearGradient axisRectGradient; //dégradé surface du plot
+    axisRectGradient.setStart(0, 0);
+    axisRectGradient.setFinalStop(0, 350);
+    axisRectGradient.setColorAt(0, QColor(35,45,55));
+    //axisRectGradient.setColorAt(0.75,QColor(40,50,60));
+    axisRectGradient.setColorAt(1, QColor(15,25,35));
+    ui->plotEfficacite->axisRect()->setBackground(axisRectGradient);
+
+    ui->plotTemperature->xAxis->setBasePen(QPen(Qt::white));
+    ui->plotTemperature->yAxis->setBasePen(QPen(Qt::white));
+    ui->plotTemperature->xAxis->setTickPen(QPen(Qt::white));
+    ui->plotTemperature->yAxis->setTickPen(QPen(Qt::white));
+    ui->plotTemperature->xAxis->setLabelColor(Qt::white);
+    ui->plotTemperature->yAxis->setLabelColor(Qt::white);
+    ui->plotTemperature->xAxis->setTickLabelColor(Qt::white);
+    ui->plotTemperature->yAxis->setTickLabelColor(Qt::white);
+    ui->plotTemperature->xAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotTemperature->yAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotTemperature->setBackground(plotGradient);
+    ui->plotTemperature->axisRect()->setBackground(axisRectGradient);
+    ui->plotTemperature->legend->setBrush(QBrush(QColor(40,50,60)));
+    ui->plotTemperature->legend->setTextColor(Qt::white);
+
+    ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::white));
+    ui->plotCouleurs->yAxis->setBasePen(QPen(Qt::white));
+    ui->plotCouleurs->xAxis->setTickPen(QPen(Qt::white));
+    ui->plotCouleurs->yAxis->setTickPen(QPen(Qt::white));
+    ui->plotCouleurs->xAxis->setLabelColor(Qt::white);
+    ui->plotCouleurs->yAxis->setLabelColor(Qt::white);
+    ui->plotCouleurs->xAxis->setTickLabelColor(Qt::white);
+    ui->plotCouleurs->yAxis->setTickLabelColor(Qt::white);
+    ui->plotCouleurs->xAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotCouleurs->yAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
+    ui->plotCouleurs->setBackground(plotGradient);
+    ui->plotCouleurs->axisRect()->setBackground(axisRectGradient);
+    ui->plotCouleurs->legend->setBrush(QBrush(QColor(40,50,60)));
+    ui->plotCouleurs->legend->setTextColor(Qt::white);
+
+    ui->plotEfficacite->rescaleAxes();
+    ui->plotEfficacite->replot();
+    ui->plotEfficacite->update();
+    ui->plotCouleurs->rescaleAxes();
+    ui->plotCouleurs->replot();
+    ui->plotCouleurs->update();
+    ui->plotTemperature->rescaleAxes();
+    ui->plotTemperature->replot();
+    ui->plotTemperature->update();
+
+    QFile f(":qdarkstyle/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
+    blueMode=true;
 }
 
 void Index::dessiner(QString param)
