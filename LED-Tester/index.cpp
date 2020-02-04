@@ -68,6 +68,7 @@ Index::Index(QWidget *parent)
     connect(ui->ajoutRef, SIGNAL(triggered()), this, SLOT(ouvrirReferenceWindow()));
     connect(ui->actionPorts, SIGNAL(triggered()), this, SLOT(ouvrirMenuPorts()));
     connect(ui->enregistrer, SIGNAL(triggered()), this, SLOT(enregistrement()));
+    connect(ui->imprimer, SIGNAL(triggered()), this, SLOT(impression()));
 
     portUtilise = new QSerialPort(this);
 
@@ -224,9 +225,6 @@ void Index::ouvrirMenuPorts()
 
 void Index::enregistrement()
 {
-    int pageWidth,pageHeight,size;
-    QRect viewport;
-
     QString fileName = QFileDialog::getSaveFileName(this,
     tr("Enregistrer sous ..."), "",
     tr("Fichier PDF (*.pdf);;All Files (*)"));
@@ -249,6 +247,55 @@ void Index::enregistrement()
     ui->plotCouleurs->toPainter(&painter,printer.width(),printer.height());
 
     painter.end();
+}
+
+void Index::impression()
+{
+    QPrinter printer;
+
+    /*printer.setOutputFormat(QPrinter::NativeFormat);
+    printer.setOrientation(QPrinter::Landscape);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setPageSize(QPrinter::A4);
+    printer.setPageMargins(10,10,10,10,QPrinter::Millimeter);*/
+
+    //QCPPainter painter(&printer);
+
+    //painter.begin(&printer);
+
+    /*ui->plotEfficacite->toPainter(&painter,printer.width(),printer.height());
+    printer.newPage();
+    ui->plotTemperature->toPainter(&painter,printer.width(),printer.height());
+    printer.newPage();
+    ui->plotCouleurs->toPainter(&painter,printer.width(),printer.height());*/
+
+    //painter.end();
+
+    QPrintPreviewDialog *preview = new QPrintPreviewDialog(&printer,this);
+    connect(preview,SIGNAL(paintRequested(QPrinter *)),this,SLOT(printPreview(QPrinter *)));
+    preview->exec();
+}
+
+void Index::printPreview(QPrinter *printer)
+{
+    printer->setOutputFormat(QPrinter::NativeFormat);
+    printer->setOrientation(QPrinter::Landscape);
+    printer->setPaperSize(QPrinter::A4);
+    printer->setPageSize(QPrinter::A4);
+    printer->setPageMargins(10,10,10,10,QPrinter::Millimeter);
+
+    QCPPainter painter(printer);
+
+    painter.begin(printer);
+
+    ui->plotEfficacite->toPainter(&painter,printer->width(),printer->height());
+    printer->newPage();
+    ui->plotTemperature->toPainter(&painter,printer->width(),printer->height());
+    printer->newPage();
+    ui->plotCouleurs->toPainter(&painter,printer->width(),printer->height());
+
+    painter.end();
+
 }
 
 void Index::enregistrerSous()
@@ -318,14 +365,6 @@ void Index::ajouterPoint(double x, double y, QString param)
     {
         efficacite_x.append(x);
         efficacite_y.append(y);
-
-        /*//TEST
-        struct efficacite eff;
-        eff.x = x;
-        eff.y = y;
-        tableauEfficacite.append(eff);
-        //FINTEST*/
-
         efficacite_ref_x.append(x);
         efficacite_ref_y.append(efficaciteRef);
     }

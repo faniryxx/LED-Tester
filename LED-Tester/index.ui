@@ -325,6 +325,7 @@
     <addaction name="actionPorts"/>
     <addaction name="separator"/>
     <addaction name="enregistrer"/>
+    <addaction name="imprimer"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -342,6 +343,11 @@
   <action name="enregistrer">
    <property name="text">
     <string>Enregistrer les graphes</string>
+   </property>
+  </action>
+  <action name="imprimer">
+   <property name="text">
+    <string>Aperçu avant impression</string>
    </property>
   </action>
  </widget>

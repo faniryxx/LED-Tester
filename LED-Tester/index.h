@@ -2,6 +2,7 @@
 #define INDEX_H
 #include <QMainWindow>
 #include <QSerialPort>
+#include <QPrinter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Index; }
@@ -40,6 +41,8 @@ private slots:
     void ouvrirReferenceWindow();
     void ouvrirMenuPorts();
     void enregistrement();
+    void impression();
+    void printPreview(QPrinter *);
 
 private:
     Ui::Index *ui;
