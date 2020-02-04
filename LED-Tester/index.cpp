@@ -279,9 +279,6 @@ void Index::impression()
 void Index::printPreview(QPrinter *printer)
 {
     printer->setOutputFormat(QPrinter::NativeFormat);
-    printer->setOrientation(QPrinter::Landscape);
-    printer->setPaperSize(QPrinter::A4);
-    printer->setPageSize(QPrinter::A4);
     printer->setPageMargins(10,10,10,10,QPrinter::Millimeter);
 
     QCPPainter painter(printer);
@@ -295,7 +292,6 @@ void Index::printPreview(QPrinter *printer)
     ui->plotCouleurs->toPainter(&painter,printer->width(),printer->height());
 
     painter.end();
-
 }
 
 void Index::enregistrerSous()
