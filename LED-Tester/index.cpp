@@ -1,3 +1,11 @@
+/***************************************************************************
+**                          LED-TESTER                                    **
+****************************************************************************
+**           Author: Nathan RANAIVO                                       **
+**             Date: 04/02/2020                                           **
+**          Version: 1.0                                                  **
+****************************************************************************/
+
 #include "index.h"
 #include "ui_index.h"
 #include <random>
@@ -253,24 +261,6 @@ void Index::impression()
 {
     QPrinter printer;
 
-    /*printer.setOutputFormat(QPrinter::NativeFormat);
-    printer.setOrientation(QPrinter::Landscape);
-    printer.setPaperSize(QPrinter::A4);
-    printer.setPageSize(QPrinter::A4);
-    printer.setPageMargins(10,10,10,10,QPrinter::Millimeter);*/
-
-    //QCPPainter painter(&printer);
-
-    //painter.begin(&printer);
-
-    /*ui->plotEfficacite->toPainter(&painter,printer.width(),printer.height());
-    printer.newPage();
-    ui->plotTemperature->toPainter(&painter,printer.width(),printer.height());
-    printer.newPage();
-    ui->plotCouleurs->toPainter(&painter,printer.width(),printer.height());*/
-
-    //painter.end();
-
     QPrintPreviewDialog *preview = new QPrintPreviewDialog(&printer,this);
     connect(preview,SIGNAL(paintRequested(QPrinter *)),this,SLOT(printPreview(QPrinter *)));
     preview->exec();
@@ -279,7 +269,7 @@ void Index::impression()
 void Index::printPreview(QPrinter *printer)
 {
     printer->setOutputFormat(QPrinter::NativeFormat);
-    printer->setPageMargins(10,10,10,10,QPrinter::Millimeter);
+    //printer->setPageMargins(10,10,10,10, QPrinter::Millimeter);
 
     QCPPainter painter(printer);
 
