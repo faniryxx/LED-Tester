@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QPrinter>
+#include <qcustomplot.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Index; }
@@ -67,5 +68,8 @@ private:
     QList<efficacite> tableauEfficacite;
     QSerialPort *portUtilise;
     bool blueMode;
+    QCPBars *rouge;
+    QCPBars *vert;
+    QCPBars *bleu;
 };
 #endif // INDEX_H

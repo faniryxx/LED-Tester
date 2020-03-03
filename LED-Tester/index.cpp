@@ -53,22 +53,32 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->graph(1)->setPen(QPen(QColor(190, 190, 190)));
     ui->plotTemperature->graph(1)->removeFromLegend();
 
-    ui->plotCouleurs->addGraph(); //rouge
-    ui->plotCouleurs->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
-    ui->plotCouleurs->graph(0)->setLineStyle(QCPGraph::lsLine);
-    ui->plotCouleurs->graph(0)->setPen(QPen(QColor(250, 0, 0)));
-
-    ui->plotCouleurs->addGraph(); //vert
-    ui->plotCouleurs->graph(1)->setScatterStyle(QCPScatterStyle::ssCircle);
-    ui->plotCouleurs->graph(1)->setLineStyle(QCPGraph::lsLine);
-    ui->plotCouleurs->graph(1)->setPen(QPen(QColor(0, 200, 0)));
-
-    ui->plotCouleurs->addGraph(); //bleu
-    ui->plotCouleurs->graph(2)->setScatterStyle(QCPScatterStyle::ssCircle);
-    ui->plotCouleurs->graph(2)->setLineStyle(QCPGraph::lsLine);
-    ui->plotCouleurs->graph(2)->setPen(QPen(QColor(0, 0, 209)));
-    ui->plotCouleurs->xAxis->setLabel("Temps");
-    ui->plotCouleurs->yAxis->setLabel("Valeur (RGB)");
+    ui->plotCouleurs->yAxis->setLabel("Valeur (%)");
+    rouge = new QCPBars(ui->plotCouleurs->xAxis,ui->plotCouleurs->yAxis);
+    rouge->setAntialiased(true);
+    rouge->setName("Rouge");
+    rouge->setBrush(QColor(187, 0, 0,210));
+    rouge->setPen(QPen(Qt::red));
+    vert = new QCPBars(ui->plotCouleurs->xAxis,ui->plotCouleurs->yAxis);
+    vert->setAntialiased(true);
+    vert->setName("Vert");
+    vert->setBrush(QColor(0, 187, 0,210));
+    vert->setPen(QPen(Qt::green));
+    bleu = new QCPBars(ui->plotCouleurs->xAxis,ui->plotCouleurs->yAxis);
+    bleu->setAntialiased(true);
+    bleu->setName("Bleu");
+    bleu->setBrush(QColor(0, 0, 187,210));
+    bleu->setPen(QPen(Qt::blue));
+    QVector<double> ticks;
+    QVector<QString> labels;
+    ticks << 1 << 2 << 3;
+    labels << "Rouge" << "Vert" << "Bleu";
+    QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+    textTicker->addTicks(ticks, labels);
+    ui->plotCouleurs->xAxis->setTicker(textTicker);
+    ui->plotCouleurs->xAxis->setRange(0, 4);
+    ui->plotCouleurs->xAxis->setTickLength(0,1);
+    ui->plotCouleurs->yAxis->setRange(0,101);
 
     timerMesure = new QTimer(this);
     timerTempsRestant = new QTimer(this);
@@ -85,7 +95,7 @@ Index::Index(QWidget *parent)
     ref = "";
 
     QStringList headers;
-    headers << "Temps" << "Luminosité" << "Température" << "Teinte rouge" << "Teinte verte" << "Teinte bleue" ;
+    headers << "Temps (s)" << "Luminosité (Lux)" << "Température (°C)" << "Teinte rouge (%)" << "Teinte verte (%)" << "Teinte bleue (%)" ;
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -167,7 +177,7 @@ void Index::setLightMode()
     ui->plotEfficacite->rescaleAxes();
     ui->plotEfficacite->replot();
     ui->plotEfficacite->update();
-    ui->plotCouleurs->rescaleAxes();
+    //ui->plotCouleurs->rescaleAxes();
     ui->plotCouleurs->replot();
     ui->plotCouleurs->update();
     ui->plotTemperature->rescaleAxes();
@@ -240,7 +250,7 @@ void Index::setBlueMode()
     ui->plotEfficacite->rescaleAxes();
     ui->plotEfficacite->replot();
     ui->plotEfficacite->update();
-    ui->plotCouleurs->rescaleAxes();
+    //ui->plotCouleurs->rescaleAxes();
     ui->plotCouleurs->replot();
     ui->plotCouleurs->update();
     ui->plotTemperature->rescaleAxes();
@@ -282,10 +292,15 @@ void Index::dessiner(QString param)
 
     else if(param == "Couleurs")
     {
-        ui->plotCouleurs->graph(0)->setData(couleurs_x_R,couleurs_rouge);
-        ui->plotCouleurs->graph(1)->setData(couleurs_x_V,couleurs_vert);
-        ui->plotCouleurs->graph(2)->setData(couleurs_x_B,couleurs_bleu);
-        ui->plotCouleurs->rescaleAxes();
+        if(couleurs_x_R.count()!=0)
+        {
+            rouge->data()->clear();
+            rouge->addData(1,couleurs_rouge.last());
+            vert->data()->clear();
+            vert->addData(2,couleurs_vert.last());
+            bleu->data()->clear();
+            bleu->addData(3,couleurs_bleu.last());
+        }
         ui->plotCouleurs->replot();
         ui->plotCouleurs->update();
     }
@@ -310,6 +325,7 @@ void Index::dessiner(QString param)
             lastValue = temperature_y.last();
             tempString = QString("%1").arg(lastValue);
             ui->tableWidget->setItem(currentRowCount,2, new QTableWidgetItem(tempString));
+
             lastValue = couleurs_rouge.last();
             rougeString = QString("%1").arg(lastValue);
             ui->tableWidget->setItem(currentRowCount,3, new QTableWidgetItem(rougeString));
@@ -327,11 +343,11 @@ void Index::dessiner(QString param)
 
 void Index::on_boutonMesure_clicked()
 {
-    if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty() && !ui->ref->text().isEmpty())
-    {
+    //if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty() && !ui->ref->text().isEmpty())
+    //{
         nettoyerTout();
         demarrerTimer();
-    }
+    /*}
     else if(ui->intervalle->value()>ui->duree->value())
     {
         QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
@@ -343,7 +359,7 @@ void Index::on_boutonMesure_clicked()
     else if(ui->ref->text().isEmpty())
     {
         QMessageBox::critical(this, "Référence du tube manquant", "Veuillez entrer la référence du tube à tester avant de lancer la mesure.");
-    }
+    }*/
 }
 
 int Index::genererRandom(int min, int max)
@@ -367,11 +383,11 @@ void Index::arreterTimer()
 
 void Index::updateGraph()
 {
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(125,128),"Efficacité");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(50,100),"Efficacité");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(95,98),"Température");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Rouge");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Vert");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Bleu");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Rouge");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Vert");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Bleu");
     dessiner("All");
 }
 
