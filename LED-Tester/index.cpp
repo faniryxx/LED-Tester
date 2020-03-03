@@ -53,6 +53,10 @@ Index::Index(QWidget *parent)
     ui->plotTemperature->graph(1)->setPen(QPen(QColor(190, 190, 190)));
     ui->plotTemperature->graph(1)->removeFromLegend();
 
+    ui->plotCouleurs->yAxis->setVisible(false);
+    ui->plotCouleurs->yAxis->grid()->setVisible(false);
+    ui->plotCouleurs->xAxis->grid()->setVisible(false);
+
     ui->plotCouleurs->yAxis->setLabel("Valeur (%)");
     rouge = new QCPBars(ui->plotCouleurs->xAxis,ui->plotCouleurs->yAxis);
     rouge->setAntialiased(true);
@@ -307,7 +311,12 @@ void Index::dessiner(QString param)
             bleu->data()->clear();
             bleu->addData(3,couleurs_bleu.last());
             teinte->setBrush(QColor(EstimerCouleur(couleurs_rouge.last(),couleurs_vert.last(),couleurs_bleu.last())));
+            QColor *teinte = new QColor(EstimerCouleur(couleurs_rouge.last(),couleurs_vert.last(),couleurs_bleu.last()));
+            QString teinteString = teinte->name();
+            ui->approximationTeinte->setText(teinteString);
         }
+
+
         ui->plotCouleurs->replot();
         ui->plotCouleurs->update();
     }
