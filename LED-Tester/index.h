@@ -65,7 +65,7 @@ private:
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
     QString ref;
-    double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    double efficaciteRef, temperatureRef;//, rougeRef, vertRef, bleuRef;
     QList<efficacite> tableauEfficacite;
     QSerialPort *portUtilise;
     bool blueMode;

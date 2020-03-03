@@ -46,10 +46,10 @@ private:
     Ui::referenceWindow *ui;
     QVector<double> efficacite_x, efficacite_y;
     QVector<double> temperature_x, temperature_y;
-    QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
+    //QVector<double> couleurs_x_R, couleurs_x_V, couleurs_x_B, couleurs_rouge, couleurs_vert, couleurs_bleu;
     QTimer *timerMesure;
     QTimer *timerTempsRestant;
-    double efficaciteRef, temperatureRef, rougeRef, vertRef, bleuRef;
+    double efficaciteRef, temperatureRef;//, rougeRef, vertRef, bleuRef;
     QString ref;
     Index *papa;
 };

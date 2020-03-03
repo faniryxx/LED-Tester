@@ -26,7 +26,7 @@ referenceWindow::referenceWindow(Index *parent) :
     ui->plotTemperature->addGraph();
     ui->plotTemperature->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotTemperature->graph(0)->setLineStyle(QCPGraph::lsLine);
-
+/*
     ui->plotCouleurs->addGraph(); //rouge
     ui->plotCouleurs->graph(0)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotCouleurs->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -40,7 +40,7 @@ referenceWindow::referenceWindow(Index *parent) :
     ui->plotCouleurs->addGraph(); //bleu
     ui->plotCouleurs->graph(2)->setScatterStyle(QCPScatterStyle::ssCircle);
     ui->plotCouleurs->graph(2)->setLineStyle(QCPGraph::lsLine);
-    ui->plotCouleurs->graph(2)->setPen(QPen(QColor(0, 0, 209)));
+    ui->plotCouleurs->graph(2)->setPen(QPen(QColor(0, 0, 209)));*/
 
     timerMesure = new QTimer(this);
     timerTempsRestant = new QTimer(this);
@@ -64,7 +64,8 @@ void referenceWindow::ajouterPoint(double x, double y, QString param)
     {
         temperature_x.append(x);
         temperature_y.append(y);
-    }
+    }/*
+
     else if(param == "Rouge")
     {
         couleurs_x_R.append(x);
@@ -79,7 +80,7 @@ void referenceWindow::ajouterPoint(double x, double y, QString param)
     {
         couleurs_x_B.append(x);
         couleurs_bleu.append(y);
-    }
+    }*/
 }
 
 referenceWindow::~referenceWindow()
@@ -108,9 +109,9 @@ void referenceWindow::updateGraph()
 {
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(125,128),"Efficacité");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(95,98),"Température");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Rouge");
+    /*ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Rouge");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Vert");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Bleu");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(250,255),"Bleu");*/
     dessiner("All");
 }
 
@@ -135,7 +136,7 @@ void referenceWindow::effacer(QString param)
         temperature_x.clear();
         temperature_y.clear();
     }
-    else if(param == "Couleurs")
+    /*else if(param == "Couleurs")
     {
         couleurs_x_R.clear();
         couleurs_x_V.clear();
@@ -143,7 +144,7 @@ void referenceWindow::effacer(QString param)
         couleurs_rouge.clear();
         couleurs_vert.clear();
         couleurs_bleu.clear();
-    }
+    }*/
 }
 
 void referenceWindow::dessiner(QString param)
@@ -164,7 +165,7 @@ void referenceWindow::dessiner(QString param)
         ui->plotTemperature->update();
     }
 
-    else if(param == "Couleurs")
+    /*else if(param == "Couleurs")
     {
         ui->plotCouleurs->graph(0)->setData(couleurs_x_R,couleurs_rouge);
         ui->plotCouleurs->graph(1)->setData(couleurs_x_V,couleurs_vert);
@@ -172,13 +173,13 @@ void referenceWindow::dessiner(QString param)
         ui->plotCouleurs->rescaleAxes();
         ui->plotCouleurs->replot();
         ui->plotCouleurs->update();
-    }
+    }*/
 
     else if(param == "All")
     {
         dessiner("Efficacité");
         dessiner("Température");
-        dessiner("Couleurs");
+        //dessiner("Couleurs");
     }
 }
 
@@ -199,8 +200,8 @@ void referenceWindow::nettoyerTout()
     dessiner("Efficacité");
     effacer("Température");
     dessiner("Température");
-    effacer("Couleurs");
-    dessiner("Couleurs");
+    /*effacer("Couleurs");
+    dessiner("Couleurs");*/
 }
 
 double referenceWindow::calculerMoyenne(QVector<double> parametre)
@@ -217,9 +218,9 @@ double referenceWindow::calculerMoyenne(QVector<double> parametre)
 void referenceWindow::setValeursMoyennes()
 {
     efficaciteRef = calculerMoyenne(efficacite_y);
-    rougeRef = calculerMoyenne(couleurs_rouge);
+    /*rougeRef = calculerMoyenne(couleurs_rouge);
     vertRef = calculerMoyenne(couleurs_vert);
-    bleuRef = calculerMoyenne(couleurs_bleu);
+    bleuRef = calculerMoyenne(couleurs_bleu);*/
     temperatureRef = calculerMoyenne(temperature_y);
 }
 
@@ -273,7 +274,7 @@ void referenceWindow::setLightMode()
     ui->plotTemperature->setBackground(*new QBrush(Qt::white));
     ui->plotTemperature->axisRect()->setBackground(*new QBrush(Qt::white));
 
-    ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::black));
+    /*ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::black));
     ui->plotCouleurs->yAxis->setBasePen(QPen(Qt::black));
     ui->plotCouleurs->xAxis->setTickPen(QPen(Qt::black));
     ui->plotCouleurs->yAxis->setTickPen(QPen(Qt::black));
@@ -284,14 +285,14 @@ void referenceWindow::setLightMode()
     ui->plotCouleurs->xAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
     ui->plotCouleurs->yAxis->grid()->setPen(QPen(Qt::black, 1, Qt::DotLine));
     ui->plotCouleurs->setBackground(*new QBrush(Qt::white));
-    ui->plotCouleurs->axisRect()->setBackground(*new QBrush(Qt::white));
+    ui->plotCouleurs->axisRect()->setBackground(*new QBrush(Qt::white));*/
 
     ui->plotEfficacite->rescaleAxes();
     ui->plotEfficacite->replot();
     ui->plotEfficacite->update();
-    ui->plotCouleurs->rescaleAxes();
+    /*ui->plotCouleurs->rescaleAxes();
     ui->plotCouleurs->replot();
-    ui->plotCouleurs->update();
+    ui->plotCouleurs->update();*/
     ui->plotTemperature->rescaleAxes();
     ui->plotTemperature->replot();
     ui->plotTemperature->update();
@@ -337,7 +338,7 @@ void referenceWindow::setBlueMode()
     ui->plotTemperature->setBackground(plotGradient);
     ui->plotTemperature->axisRect()->setBackground(axisRectGradient);
 
-    ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::white));
+    /*ui->plotCouleurs->xAxis->setBasePen(QPen(Qt::white));
     ui->plotCouleurs->yAxis->setBasePen(QPen(Qt::white));
     ui->plotCouleurs->xAxis->setTickPen(QPen(Qt::white));
     ui->plotCouleurs->yAxis->setTickPen(QPen(Qt::white));
@@ -348,14 +349,14 @@ void referenceWindow::setBlueMode()
     ui->plotCouleurs->xAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
     ui->plotCouleurs->yAxis->grid()->setPen(QPen(Qt::white, 1, Qt::DotLine));
     ui->plotCouleurs->setBackground(plotGradient);
-    ui->plotCouleurs->axisRect()->setBackground(axisRectGradient);
+    ui->plotCouleurs->axisRect()->setBackground(axisRectGradient);*/
 
     ui->plotEfficacite->rescaleAxes();
     ui->plotEfficacite->replot();
     ui->plotEfficacite->update();
-    ui->plotCouleurs->rescaleAxes();
+    /*ui->plotCouleurs->rescaleAxes();
     ui->plotCouleurs->replot();
-    ui->plotCouleurs->update();
+    ui->plotCouleurs->update();*/
     ui->plotTemperature->rescaleAxes();
     ui->plotTemperature->replot();
     ui->plotTemperature->update();
