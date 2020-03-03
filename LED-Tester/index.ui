@@ -347,7 +347,7 @@
   </action>
   <action name="enregistrer">
    <property name="text">
-    <string>Enregistrer les graphes</string>
+    <string>Exporter en PDF</string>
    </property>
   </action>
   <action name="imprimer">
