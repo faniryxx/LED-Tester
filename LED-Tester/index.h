@@ -41,6 +41,7 @@ public:
     void showLegend();
     void getSelectPortName(QString portName);
     bool getBlueModeState(){return blueMode;}
+    QRgb EstimerCouleur(int rouge,int vert, int bleu);
     ~Index();
 
 private slots:
@@ -71,5 +72,6 @@ private:
     QCPBars *rouge;
     QCPBars *vert;
     QCPBars *bleu;
+    QCPBars *teinte;
 };
 #endif // INDEX_H

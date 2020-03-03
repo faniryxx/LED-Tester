@@ -69,14 +69,20 @@ Index::Index(QWidget *parent)
     bleu->setName("Bleu");
     bleu->setBrush(QColor(0, 0, 187,210));
     bleu->setPen(QPen(Qt::blue));
+    teinte = new QCPBars(ui->plotCouleurs->xAxis,ui->plotCouleurs->yAxis);
+    teinte->setAntialiased(true);
+    teinte->setName("Bleu");
+    teinte->setBrush(QColor(0, 0, 0, 0));
+    teinte->setPen(QPen(QColor(0,0,0,0)));
+    teinte->addData(4,100);
     QVector<double> ticks;
     QVector<QString> labels;
-    ticks << 1 << 2 << 3;
-    labels << "Rouge" << "Vert" << "Bleu";
+    ticks << 1 << 2 << 3 << 4;
+    labels << "Rouge" << "Vert" << "Bleu" << "Approximation de la teinte";
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTicks(ticks, labels);
     ui->plotCouleurs->xAxis->setTicker(textTicker);
-    ui->plotCouleurs->xAxis->setRange(0, 4);
+    ui->plotCouleurs->xAxis->setRange(0, 5);
     ui->plotCouleurs->xAxis->setTickLength(0,1);
     ui->plotCouleurs->yAxis->setRange(0,101);
 
@@ -300,6 +306,7 @@ void Index::dessiner(QString param)
             vert->addData(2,couleurs_vert.last());
             bleu->data()->clear();
             bleu->addData(3,couleurs_bleu.last());
+            teinte->setBrush(QColor(EstimerCouleur(couleurs_rouge.last(),couleurs_vert.last(),couleurs_bleu.last())));
         }
         ui->plotCouleurs->replot();
         ui->plotCouleurs->update();
@@ -524,6 +531,16 @@ void Index::getSelectPortName(QString portName)
         if(portName == port.portName()) portUtilise->setPort(port);
     }
     ui->portSelect->setText(portUtilise->portName());
+}
+
+QRgb Index::EstimerCouleur(int rouge, int vert, int bleu)
+{
+    rouge = (rouge * 255) / 100;
+    vert = (vert * 255) / 100;
+    bleu = (bleu * 255) / 100;
+    QColor couleur = QColor(rouge,vert,bleu);
+    QRgb rgb = couleur.rgb();
+    return rgb;
 }
 
 void Index::ajouterPoint(double x, double y, QString param)
