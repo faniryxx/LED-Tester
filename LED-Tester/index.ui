@@ -397,6 +397,7 @@
     <property name="title">
      <string>Affichage</string>
     </property>
+    <addaction name="actionDebug"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuAffichage"/>
@@ -444,6 +445,11 @@
   <action name="actionSombre_2">
    <property name="text">
     <string>Sombre</string>
+   </property>
+  </action>
+  <action name="actionDebug">
+   <property name="text">
+    <string>Débogage</string>
    </property>
   </action>
  </widget>

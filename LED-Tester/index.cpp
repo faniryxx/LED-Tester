@@ -129,6 +129,8 @@ Index::Index(QWidget *parent)
     action->setCheckable(true);
     themeGroup->addAction(action);
 
+    connect(ui->actionDebug,SIGNAL(triggered()),this,SLOT(ouvrirDebug()));
+
     blueMode=false;
 }
 
@@ -196,6 +198,14 @@ void Index::setLightMode()
 
     qApp->setStyleSheet("");
     blueMode=false;
+}
+
+void Index::ouvrirDebug()
+{
+    qDebug() << "Ouvrir debug";
+    /*
+     * a implémenter
+     * */
 }
 
 void Index::setBlueMode()
