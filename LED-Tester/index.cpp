@@ -198,6 +198,8 @@ void Index::setLightMode()
 
     qApp->setStyleSheet("");
     blueMode=false;
+
+    qDebug() << "Activation du light mode";
 }
 
 void Index::ouvrirDebug()
@@ -288,6 +290,8 @@ void Index::setBlueMode()
         qApp->setStyleSheet(ts.readAll());
     }
     blueMode=true;
+
+     qDebug() << "Activation du blue mode";
 }
 
 void Index::dessiner(QString param)
@@ -364,16 +368,17 @@ void Index::dessiner(QString param)
 
             ui->tableWidget->scrollToBottom();
         }
+        qDebug() << "Updating...";
     }
 }
 
 void Index::on_boutonMesure_clicked()
 {
-    //if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty() && !ui->ref->text().isEmpty())
-    //{
+    if(ui->intervalle->value()<=ui->duree->value() && !ref.isEmpty() && !ui->ref->text().isEmpty())
+    {
         nettoyerTout();
         demarrerTimer();
-    /*}
+    }
     else if(ui->intervalle->value()>ui->duree->value())
     {
         QMessageBox::critical(this, "Valeurs incorrectes", "Veuillez vérifier les valeurs et relancez la mesure.");
@@ -385,7 +390,7 @@ void Index::on_boutonMesure_clicked()
     else if(ui->ref->text().isEmpty())
     {
         QMessageBox::critical(this, "Référence du tube manquant", "Veuillez entrer la référence du tube à tester avant de lancer la mesure.");
-    }*/
+    }
 }
 
 int Index::genererRandom(int min, int max)
@@ -402,6 +407,7 @@ void Index::demarrerTimer()
 
 void Index::arreterTimer()
 {
+    qDebug() << "Fin de la mesure.";
     timerMesure->stop();
     timerTempsRestant->stop();
     QMessageBox::information(this, "Fin de la mesure", "Les mesures ont été effectuées.");
@@ -414,6 +420,7 @@ void Index::updateGraph()
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Rouge");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Vert");
     ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Bleu");
+    qDebug() << "Valeurs aléatoires générées";
     dessiner("All");
 }
 
@@ -632,4 +639,6 @@ void Index::nettoyerTout()
     dessiner("Couleurs");
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
+
+    qDebug() << "Nettoyage ...";
 }
