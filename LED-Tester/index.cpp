@@ -129,6 +129,8 @@ Index::Index(QWidget *parent)
     action->setCheckable(true);
     themeGroup->addAction(action);
 
+    connect(ui->actionDebug,SIGNAL(triggered()),this,SLOT(ouvrirDebug()));
+
     blueMode=false;
 }
 
@@ -196,6 +198,16 @@ void Index::setLightMode()
 
     qApp->setStyleSheet("");
     blueMode=false;
+
+    qDebug() << "Activation du light mode";
+}
+
+void Index::ouvrirDebug()
+{
+    qDebug() << "Ouvrir debug";
+    /*
+     * a implémenter
+     * */
 }
 
 void Index::setBlueMode()
@@ -278,6 +290,8 @@ void Index::setBlueMode()
         qApp->setStyleSheet(ts.readAll());
     }
     blueMode=true;
+
+     qDebug() << "Activation du blue mode";
 }
 
 void Index::dessiner(QString param)
@@ -354,6 +368,7 @@ void Index::dessiner(QString param)
 
             ui->tableWidget->scrollToBottom();
         }
+        qDebug() << "Updating...";
     }
 }
 
@@ -392,6 +407,7 @@ void Index::demarrerTimer()
 
 void Index::arreterTimer()
 {
+    qDebug() << "Fin de la mesure.";
     timerMesure->stop();
     timerTempsRestant->stop();
     QMessageBox::information(this, "Fin de la mesure", "Les mesures ont été effectuées.");
@@ -643,4 +659,6 @@ void Index::nettoyerTout()
     dessiner("Couleurs");
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
+
+    qDebug() << "Nettoyage ...";
 }

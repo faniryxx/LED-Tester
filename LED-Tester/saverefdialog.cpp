@@ -28,11 +28,12 @@ saveRefDialog::~saveRefDialog()
 
 void saveRefDialog::on_annulerRef_clicked()
 {
-    close();
+    this->close();
 }
 
 void saveRefDialog::on_confirmerRef_clicked()
 {
     papa->setReferenceParent();
-    close();
+    this->close();
+    papa->close();
 }

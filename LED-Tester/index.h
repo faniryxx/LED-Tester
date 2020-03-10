@@ -57,6 +57,7 @@ private slots:
     void printPreview(QPrinter *);
     void setBlueMode();
     void setLightMode();
+    void ouvrirDebug();
 
 private:
     Ui::Index *ui;
