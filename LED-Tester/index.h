@@ -42,6 +42,7 @@ public:
     void getSelectPortName(QString portName);
     bool getBlueModeState(){return blueMode;}
     QRgb EstimerCouleur(int rouge,int vert, int bleu);
+    QVector<double> getValeursCapteur();
     ~Index();
 
 private slots:

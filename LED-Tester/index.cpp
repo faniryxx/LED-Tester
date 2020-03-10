@@ -399,12 +399,33 @@ void Index::arreterTimer()
 
 void Index::updateGraph()
 {
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(50,100),"Efficacité");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(95,98),"Température");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Rouge");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Vert");
-    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,genererRandom(0,100),"Bleu");
+    QVector<double> values = getValeursCapteur();
+    qDebug() << "Lum: " << values.at(0);
+    qDebug() << "Temp: " << values.at(1);
+    qDebug() << "Rouge: " << values.at(2);
+    qDebug() << "Vert: " << values.at(3);
+    qDebug() << "Bleu: " << values.at(4);
+    qDebug() << "Kelvin: " << values.at(5);
+
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,values.at(0),"Efficacité");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,values.at(1),"Température");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,values.at(2),"Rouge");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,values.at(3),"Vert");
+    ajouterPoint((((ui->duree->value()+1)*1000)-timerTempsRestant->remainingTime())/1000,values.at(4),"Bleu");
     dessiner("All");
+}
+
+//Simuler une fonction qui retourne les valeurs du capteur
+QVector<double> Index::getValeursCapteur()
+{
+    QVector<double> values;
+    values << genererRandom(50,100) // Luminosité
+    << genererRandom(95,98) // Température
+    << genererRandom(0,100) // Rouge
+    << genererRandom(0,100) // Vert
+    << genererRandom(0,100) // Bleu
+    << genererRandom(2000,7000); // Température de la couleur
+    return values;
 }
 
 void Index::on_saveButton_clicked()
